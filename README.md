@@ -1,1 +1,1 @@
-# study-happiness
+# Miscellaneous repository
