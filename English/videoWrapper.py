@@ -10,14 +10,11 @@ import numpy as np
 from datetime import datetime
 import os
 
-import getpass
 
-url = "192.168.0.9:8080"#"157.253.148.79:8080" #raw_input("Address: ")
-user = "Rutherford"#raw_input("Username: ")
-password = "jango"#getpass.getpass()
+url = input("Address: ") + ":8080"
 
-#url = "http://" + user + ":" + password + "@" + url + "/video?x.mjpeg"
 url = "http://" + url + "/video?x.mjpeg"
+print(url)
 cap = cv2.VideoCapture(url)
     
 try:
@@ -31,7 +28,6 @@ ret_val, frame = cap.read()
 y, x,_ = frame.shape
 temporizator = 0
 count = 0
-#ret_val = True
 while ret_val:
     ret_val, frame = cap.read()
     temporizator += 1
