@@ -86,15 +86,14 @@
 	La glicina es un amino\'acido cuya funci\'on es la de un inhibidor de funciones neurotransmisoras en la esp\'ina dorsal, y retina \cite{Glycine}. Fue descubierta en 1820 por Henri Braconnot cuando realizaba experimentos con gelatina y \'acido sulf\'urico. Actualmente hace parte de los 21 amino\'acidos esenciales, siendo el \'unico que no presenta quiralidad \cite{GlycineHistory}.
 	\begin{scheme}[h]
 	   	\centering
-	   	\includegraphics[width=0.5\linewidth]{images/Glicina}
+	   	\includegraphics[width=0.3\linewidth]{images/Glicina}
 	   	\caption{Estructura qu\'imica de la glicina.}
 	   	\label{fig:glicina}
 	\end{scheme}
 	
 	La bioinorg\'anica del n\'iquel tambi\'en tiene sus pecularidades, dado que fue el \'unico metal de transici\'on con periodo 3 al que no se le hab\'ian atribu\'ido funciones biol\'ogicas para 1975. Lo anterior se debi\'o en parte a que el n\'iquel no presenta bandas de absorci\'on caracter\'isticas al coordinarse con ligandos biol\'ogicos. La perspectiva biol\'ogica del n\'iquel cambi\'o al descubrirse que la ureasa es una enzima de este metal \cite{Nickel}. 
     
-    En general, el n\'iquel al igual que la mayor\'ia de metales de transici\'on prefiere una geometr\'ia tetra\'edrica. Por esta raz\'on se tiene un n\'umero m\'aximo de coordinaci\'on 6, sin embargo como el glicinato act\'ua como un ligando bidentado, es posible alcanzar \'unicamente tres diferentes iones en soluci\'on con constantes de equil\'ibrio $K_1$, $K_2$ y $K_3$:
-    
+    En general, el n\'iquel al igual que la mayor\'ia de metales de transici\'on prefiere una geometr\'ia tetra\'edrica. Por esta raz\'on se tiene un n\'umero m\'aximo de coordinaci\'on 6, sin embargo como el glicinato act\'ua como un ligando bidentado, es posible alcanzar \'unicamente tres diferentes iones en soluci\'on con constantes de equil\'ibrio $K_1$, $K_2$ y $K_3$, los cuales se muestran en la \autoref{fig:ligands}:    
     \footnotesize
     \begin{equation*}
         \begin{array}{cc}
@@ -105,33 +104,53 @@
     \end{equation*}
     \normalsize
     
-    Dado que la glicina presenta un prot\'on \'acido ligado al ox\'igeno, existe una constante de acid\'ez cuya determinaci\'on se realiza experimentalmente.
-    \begin{equation}\label{Ka}
-	    \begin{array}{lr}
-	    \ce{Gly ->[K_a] H+ + Gly^-} & K_a = \dfrac{\ce{[H+][Gly^-]}}{\ce{[Gly]}}
-	    \end{array}
+    Con el objetivo de facilitar los c\'alculos posteriores se introducen las constantes de equilibrio globales:
+    \begin{equation}
+	    \beta_n = \prod\limits_{i=1}^{i \leq n} K_i
     \end{equation}
     
-	aplicando logaritmo a ambos lados y multiplicando por -1 es obtiene una ecuaci\'on para el $pKa$.
-	\begin{equation}
-		pK_a = -\log K_a = -\log\ce{[H+]} - \log\left(\dfrac{\ce{[Gly^-]}}{\ce{[Gly]}}\right)
-	\end{equation}   
-
-    \begin{figure}[h]
+    Usando el m\'etodo de J. Bjerrum es posible calcular las constantes globales conociendo la relaci\'on entre las moles de glicinato ligado y el cati\'on libre.
+    \small  
+    \begin{equation}
+    \def\arraystretch{3}
+	    \begin{array}{rl}
+		    \tilde{n} & = \dfrac{\ce{\beta_1[Gly^-] + 2\beta_2[Gly^-]^2 + 3\beta_3[Gly^-]^3}}{\ce{1 + \beta_1[Gly^-] + \beta_2[Gly^-]^2 + \beta_3[Gly^-]^3}} \\
+		    & = \dfrac{\ce{[Gly]}_0 - (1+K_a/\ce{[H+]})(C_H + \ce{[OH^-] - [H+]})}{\ce{[NiCl2]}_0}
+	    \end{array}
+    \end{equation}
+    \normalsize
+    
+    Donde $K_a$ es la constante de acidez de la glicina, $C_H$ la concentraci\'on de protones debido al \'acido n\'itrico, y el factor $K_a/\ce{[H+]}(\cdots)$ corresponde con la concentraci\'on de glicina libre \ce{[Gly^-]}. Reescribiendo la ecuaci\'on se obtiene:
+    \footnotesize
+    \begin{equation}
+	    \dfrac{\tilde{n}}{(1-\tilde{n})\ce{[Gly^-]}} = \beta_1 + \dfrac{(2-\tilde{n})}{(1-\tilde{n})}\ce{[Gly^-]}\beta_2 + \dfrac{(3-\tilde{n})}{(1-\tilde{n})}\ce{[Gly^-]}^2\beta_3
+    \end{equation}
+    \normalsize
+    
+    Para la realizaci\'on del an\'alisis se toman dos aproximaciones importantes. En primer lugar el coeficiente de actividad $\gamma$ se asume constante a lo largo del experimento dado que la contribuci\'on de los iones distintos al nitrato es despreciable, pues estos u\'ltimos se trabajan con al menos tres \'ordenes de magnitud menos.
+    \begin{equation}
+	    \ce{[H+]} = \dfrac{10^{-pH}}{\gamma_\pm}
+    \end{equation}
+    
+    En segundo lugar las concentraciones iniciales de glicinato y n\'iquel se asumen constantes a lo largo del experimento, esto debido a que el cambio neto de volumen no supera el 5 \% del volumen inicial.
+    \begin{figure*}[h]
     	\centering
-    	\includegraphics[width=\linewidth]{images/Glicinato}
-    	\caption{text}
-    	\label{fig:glicinato}
-    \end{figure}
-    \begin{figure}[h]
-    	\centering
-    	\includegraphics[width=\linewidth]{images/Coordinated}
-    	\caption{text}
-    	\label{fig:coordinated}
-    \end{figure}
+    	\begin{tabular}{ccc}
+    		\includegraphics[width=0.2\linewidth]{images/Single.png} & \includegraphics[width=0.4\linewidth]{images/Double.png} &
+    		\includegraphics[width=0.3\linewidth]{images/Triple.png}
+    	\end{tabular}
+    	\caption{Distintos complejos de glicinato de n\'iquel en soluci\'on. Las esf\'eras rojas representan ox\'igenos, en gris se muestran los carbonos, hidr\'ogenos en blanco, y los \'atomos de nitr\'ogeno en azul.}
+    	\label{fig:ligands}
+    \end{figure*}
 	\section{Metodolog\'ia}
 
 	\section{Resultados y Discusi\'on}
+	Con el objetivo de obtener un valor estimado para la constante de acidez de la glicina se llev\'o a cabo una simulaci\'on de protonaci\'on sobre la mol\'ecula. Con lo cual se obtuvieron 71 puntos que posteriormente fueron usados en una interpolaci\'on c\'ubica con el objetivo de encontrar el valor de pH para el cual el porcentaje de formaci\'on corresponde con 50 \%. Los datos obtenidos de la simulaci\'on con Marvin y el algoritm\'o de interpolaci\'on se encuentran disponibles en \href{www}{text}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\linewidth]{images/pka_sim.pdf}
+		\caption{Simulaci\'on de la constante de acidez de la glicina.}
+	\end{figure}
 	
 	\section{Preguntas}
 	\subsection{Dibujar todos los is\'omeros \'opticos y geom\'etricos de los tres complejos de}
@@ -140,6 +159,36 @@
 	\subsubsection{\ce{[Ni(Gly^-)]_3^-}}
 	
 	\subsection{Derivar la ecuaci\'on 11}
+	La glicina se deprotona dando lugar a la siguiente reacci\'on:
+	\begin{equation}\label{Ka}
+	\begin{array}{lr}
+	\ce{Gly ->[K_a] H+ + Gly^-} & K_a = \dfrac{\ce{[H+][Gly^-]}}{\ce{[Gly]}}
+	\end{array}
+	\end{equation}
+	
+	Aplicando logaritmo a ambos lados y multiplicando por -1 es obtiene una ecuaci\'on para el $pKa$.
+	\begin{equation}\label{pKa}
+	pK_a = -\log K_a = -\log\ce{[H+]} - \log\left(\dfrac{\ce{[Gly^-]}}{\ce{[Gly]}}\right)
+	\end{equation}
+	
+	Considerando la conservaci\'on de carga en la soluci\'on:
+	\begin{equation}
+		\ce{[Gly^-]} = \ce{[H+] + [Na+] - [OH^-]}
+	\end{equation}
+	
+	Aplicando conservaci\'on de la masa:
+	\footnotesize
+	\begin{equation}
+		\ce{[Gly]} = \ce{[Gly_0]-[Gly^-]} = \ce{[Gly_0]} - \left(\ce{[H+] + [Na+] - [OH^-]}\right)
+	\end{equation}
+	\normalsize
+	
+	\small
+	Reemplazando las ecuaciones anteriores en la \autoref{pKa}.	
+	\begin{equation*}
+		pKa = -\log\ce{[H+]} - \log\left(\dfrac{\ce{[H+] + [Na+] - [OH^-]}}{\ce{[Gly_0]} - \left(\ce{[H+] + [Na+] - [OH^-]}\right)}\right)
+	\end{equation*}
+	\normalsize
 	
 	\subsection[Se prepara]{Se prepara una disoluci\'on por mezclar de 100 mL de glicina (0.2 M) y 100 mL de \ce{Cu^{2+}} (0.2 M), el pH se ajust\'o a 7 con una soluci\'on de NaOH. Calcule los porcentajes aproximados del ion \ce{Cu^{2+}} original, as\'i como los actuales despu\'es de efectuar la mezcla, \ce{Cu^{2+}}, \ce{CuA+}, y \ce{CuA_2} en la soluci\'on. Use $pK_a$ de 9.60 para la glicina y las siguientes constantes de estabilidad}:
 	\begin{equation*}
