@@ -71,6 +71,7 @@
 %----------------------------------------------------------------------------------------
 \Abstract
 {
+	Las constantes de equilibrio para los distintos complejos de n\'iquel y glicinato se determinan en $K_1=$ M$^{-1}$, $K_2=$ M$^{-1}$, $K_3=$ M$^{-1}$. Los valores son obtenidos usando el m\'etodo de Rossotti de mediciones de pH. El coeficiente de actividad se asume constante y fijo por la concentraci\'on de nitrato de potasio en soluci\'on. Las constantes son analizadas en funci\'on del tama\~no de las mol\'eculas e interacciones electroest\'aticas.
 }
 %----------------------------------------------------------------------------------------
 
@@ -93,7 +94,8 @@
 	
 	La bioinorg\'anica del n\'iquel tambi\'en tiene sus pecularidades, dado que fue el \'unico metal de transici\'on con periodo 3 al que no se le hab\'ian atribu\'ido funciones biol\'ogicas para 1975. Lo anterior se debi\'o en parte a que el n\'iquel no presenta bandas de absorci\'on caracter\'isticas al coordinarse con ligandos biol\'ogicos. La perspectiva biol\'ogica del n\'iquel cambi\'o al descubrirse que la ureasa es una enzima de este metal \cite{Nickel}. 
     
-    En general, el n\'iquel al igual que la mayor\'ia de metales de transici\'on prefiere una geometr\'ia tetra\'edrica. Por esta raz\'on se tiene un n\'umero m\'aximo de coordinaci\'on 6, sin embargo como el glicinato act\'ua como un ligando bidentado, es posible alcanzar \'unicamente tres diferentes iones en soluci\'on con constantes de equil\'ibrio $K_1$, $K_2$ y $K_3$, los cuales se muestran en la \autoref{fig:ligands}:    
+    En general, el n\'iquel al igual que la mayor\'ia de metales de transici\'on prefiere una geometr\'ia octa\'edrica. Por esta raz\'on se tiene un n\'umero m\'aximo de coordinaci\'on 6, sin embargo como el glicinato act\'ua como un ligando bidentado, es posible alcanzar \'unicamente tres diferentes iones en soluci\'on con constantes de equil\'ibrio $K_1$, $K_2$ y $K_3$, los cuales se muestran en la \autoref{fig:ligands}.
+       
     \footnotesize
     \begin{equation*}
         \begin{array}{cc}
@@ -127,25 +129,31 @@
     \end{equation}
     \normalsize
     
+    \begin{figure*}[h]
+       	\centering
+       	\begin{tabular}{ccc}
+       		\includegraphics[width=0.2\linewidth]{images/Single.png} & \includegraphics[width=0.4\linewidth]{images/Double.png} &
+       		\includegraphics[width=0.3\linewidth]{images/Triple.png}
+       	\end{tabular}
+       	\caption{Distintos complejos de glicinato de n\'iquel en soluci\'on. Las esf\'eras rojas representan ox\'igenos, en gris se muestran los carbonos, hidr\'ogenos en blanco, y los \'atomos de nitr\'ogeno en azul.}
+       	\label{fig:ligands}
+    \end{figure*} 
+    
     Para la realizaci\'on del an\'alisis se toman dos aproximaciones importantes. En primer lugar el coeficiente de actividad $\gamma$ se asume constante a lo largo del experimento dado que la contribuci\'on de los iones distintos al nitrato es despreciable, pues estos u\'ltimos se trabajan con al menos tres \'ordenes de magnitud menos.
     \begin{equation}
 	    \ce{[H+]} = \dfrac{10^{-pH}}{\gamma_\pm}
     \end{equation}
     
     En segundo lugar las concentraciones iniciales de glicinato y n\'iquel se asumen constantes a lo largo del experimento, esto debido a que el cambio neto de volumen no supera el 5 \% del volumen inicial.
-    \begin{figure*}[h]
-    	\centering
-    	\begin{tabular}{ccc}
-    		\includegraphics[width=0.2\linewidth]{images/Single.png} & \includegraphics[width=0.4\linewidth]{images/Double.png} &
-    		\includegraphics[width=0.3\linewidth]{images/Triple.png}
-    	\end{tabular}
-    	\caption{Distintos complejos de glicinato de n\'iquel en soluci\'on. Las esf\'eras rojas representan ox\'igenos, en gris se muestran los carbonos, hidr\'ogenos en blanco, y los \'atomos de nitr\'ogeno en azul.}
-    	\label{fig:ligands}
-    \end{figure*}
+   
+    
 	\section{Metodolog\'ia}
-
+	Una soluci\'on de 100 mL de NaOH es preparada a partir de \_\_\_ g de la base s\'olida, la soluci\'on se estandariza usando \_\_\_ mL de NaOH en \_\_\_ g de ftalato \'acido de potasio. Se establece la concentraci\'on de la soluci\'on en \_\_\_. Usando \_\_\_ mL de NaOH (\_\_\_ M) y \_\_\_ g de glicina se obtiene el glicinato de sodio, que posteriormente es aforado a 20 mL.
+	
+	Usando un beaker se prepara una soluci\'on que contiene \_\_\_ g de \ce{NiCl_2.6H_2O}, 10 mL de \'acido n\'itrico $0.11\pm0.1$, 100 mL de una soluci\'on de nitrato de potasio previamente preparada con concentraci\'on 0.2015 M, y 90 mL de agua. Con una bureta se adicionan al\'icuotas de 0.2 mL de glicinato de sodio a la soluci\'on hasta completar 10 mL.
+		
 	\section{Resultados y Discusi\'on}
-	Con el objetivo de obtener un valor estimado para la constante de acidez de la glicina se llev\'o a cabo una simulaci\'on de protonaci\'on sobre la mol\'ecula. Con lo cual se obtuvieron 71 puntos que posteriormente fueron usados en una interpolaci\'on c\'ubica con el objetivo de encontrar el valor de pH para el cual el porcentaje de formaci\'on corresponde con 50 \%. Los datos obtenidos de la simulaci\'on con Marvin y el algoritm\'o de interpolaci\'on se encuentran disponibles en \href{www}{text}
+	Con el objetivo de obtener un valor estimado para la constante de acidez de la glicina se llev\'o a cabo una simulaci\'on de protonaci\'on sobre la mol\'ecula. Con lo cual se obtuvieron 71 puntos que posteriormente fueron usados en una interpolaci\'on c\'ubica con el objetivo de encontrar el valor de pH para el cual el porcentaje de formaci\'on corresponde con 50 \%. Los datos obtenidos de la simulaci\'on con Marvin y el algoritm\'o de interpolaci\'on se encuentran disponibles en \href{https://github.com/jsbarbosa/study-happiness/tree/master/Lab\%20Inorganica/7-Aminoacidos}{\color{blue}GitHub} \footnote{https://github.com/jsbarbosa/study- happiness/tree/master/Lab\%20Inorganica/7-Aminoacidos}.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=\linewidth]{images/pka_sim.pdf}
@@ -156,7 +164,7 @@
 	\subsection{Dibujar todos los is\'omeros \'opticos y geom\'etricos de los tres complejos de}
 	\subsubsection{\ce{[Ni(Gly^-)]^+}}
 	\subsubsection{\ce{[Ni(Gly^-)_2]}}
-	\subsubsection{\ce{[Ni(Gly^-)]_3^-}}
+	\subsubsection{\ce{[Ni(Gly^-)_3]^-}}
 	
 	\subsection{Derivar la ecuaci\'on 11}
 	La glicina se deprotona dando lugar a la siguiente reacci\'on:
@@ -190,7 +198,7 @@
 	\end{equation*}
 	\normalsize
 	
-	\subsection[Se prepara]{Se prepara una disoluci\'on por mezclar de 100 mL de glicina (0.2 M) y 100 mL de \ce{Cu^{2+}} (0.2 M), el pH se ajust\'o a 7 con una soluci\'on de NaOH. Calcule los porcentajes aproximados del ion \ce{Cu^{2+}} original, as\'i como los actuales despu\'es de efectuar la mezcla, \ce{Cu^{2+}}, \ce{CuA+}, y \ce{CuA_2} en la soluci\'on. Use $pK_a$ de 9.60 para la glicina y las siguientes constantes de estabilidad}:
+	\subsection[Se prepara]{Se prepara una disoluci\'on por mezclar de 100 mL de glicina (0.2 M) y 100 mL de \ce{Cu^{2+}} (0.2 M), el pH se ajust\'o a 7 con una soluci\'on de NaOH. Calcule los porcentajes aproximados del ion \ce{Cu^{2+}} original, as\'i como los actuales despu\'es de efectuar la mezcla, \ce{Cu^{2+}}, \ce{CuA+}, y \ce{CuA_2} en la soluci\'on. Use $pK_a$ de 9.60 para la glicina y las siguientes constantes de estabilidad:}
 	\begin{equation*}
 	    \begin{array}{lcrc}
 	        \ce{Cu^{2+} + A-} & \ce{<=>} & \ce{CuA+} & \log K_1 = 8.38\\
