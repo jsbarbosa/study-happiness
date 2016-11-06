@@ -86,72 +86,72 @@
 	\section*{Introducci\'on}	
 	La glicina es un amino\'acido cuya funci\'on es la de un inhibidor de funciones neurotransmisoras en la esp\'ina dorsal, y retina \cite{Glycine}. Fue descubierta en 1820 por Henri Braconnot cuando realizaba experimentos con gelatina y \'acido sulf\'urico. Actualmente hace parte de los 21 amino\'acidos esenciales, siendo el \'unico que no presenta quiralidad \cite{GlycineHistory}.
 	\begin{scheme}[h]
-	   	\centering
-	   	\includegraphics[width=0.3\linewidth]{images/Glicina}
-	   	\caption{Estructura qu\'imica de la glicina.}
-	   	\label{fig:glicina}
+		\centering
+		\includegraphics[width=0.3\linewidth]{images/Glicina}
+		\caption{Estructura qu\'imica de la glicina.}
+		\label{fig:glicina}
 	\end{scheme}
 	
 	La bioinorg\'anica del n\'iquel tambi\'en tiene sus pecularidades, dado que fue el \'unico metal de transici\'on con periodo 3 al que no se le hab\'ian atribu\'ido funciones biol\'ogicas para 1975. Lo anterior se debi\'o en parte a que el n\'iquel no presenta bandas de absorci\'on caracter\'isticas al coordinarse con ligandos biol\'ogicos. La perspectiva biol\'ogica del n\'iquel cambi\'o al descubrirse que la ureasa es una enzima de este metal \cite{Nickel}. 
-    
-    En general, el n\'iquel al igual que la mayor\'ia de metales de transici\'on prefiere una geometr\'ia octa\'edrica. Por esta raz\'on se tiene un n\'umero m\'aximo de coordinaci\'on 6, sin embargo como el glicinato act\'ua como un ligando bidentado, es posible alcanzar \'unicamente tres diferentes iones en soluci\'on con constantes de equil\'ibrio $K_1$, $K_2$ y $K_3$, los cuales se muestran en la \autoref{fig:ligands}.
-       
-    \footnotesize
-    \begin{equation*}
-        \begin{array}{cc}
-        \ce{Ni^{2+} + Gly- <=> Ni(Gly)+} & K_1 = \dfrac{\ce{[Ni(Gly)+]}}{\ce{[Ni^{2+}][Gly^-]}}\\
-        \ce{Ni(Gly)+ + Gly- <=> Ni(Gly)_2} & K_2 = \dfrac{\ce{[Ni(Gly)_2]}}{\ce{[Ni(Gly)+][Gly^-]}}\\
-        \ce{Ni(Gly)_2 + Gly- <=> Ni(Gly)_3-} & K_3 = \dfrac{\ce{[Ni(Gly)_3^-]}}{\ce{[Ni(Gly)_2][Gly^-]}}
-        \end{array}
-    \end{equation*}
-    \normalsize
-    
-    Con el objetivo de facilitar los c\'alculos posteriores se introducen las constantes de equilibrio globales:
-    \begin{equation}
-	    \beta_n = \prod\limits_{i=1}^{i \leq n} K_i
-    \end{equation}
-    
-    Usando el m\'etodo de J. Bjerrum es posible calcular las constantes globales conociendo la relaci\'on entre las moles de glicinato ligado y el cati\'on libre.
-    \small  
-    \begin{equation}
-    \def\arraystretch{3}
-	    \begin{array}{rl}
-		    \tilde{n} & = \dfrac{\ce{\beta_1[Gly^-] + 2\beta_2[Gly^-]^2 + 3\beta_3[Gly^-]^3}}{\ce{1 + \beta_1[Gly^-] + \beta_2[Gly^-]^2 + \beta_3[Gly^-]^3}} \\
-		    & = \dfrac{\ce{[Gly]}_0 - (1+K_a/\ce{[H+]})(C_H + \ce{[OH^-] - [H+]})}{\ce{[NiCl2]}_0}
-	    \end{array}
-    \end{equation}
-    \normalsize
-    
-    Donde $K_a$ es la constante de acidez de la glicina, $C_H$ la concentraci\'on de protones debido al \'acido n\'itrico, y el factor $K_a/\ce{[H+]}(\cdots)$ corresponde con la concentraci\'on de glicina libre \ce{[Gly^-]}. Reescribiendo la ecuaci\'on se obtiene:
-    \footnotesize
-    \begin{equation}
-	    \dfrac{\tilde{n}}{(1-\tilde{n})\ce{[Gly^-]}} = \beta_1 + \dfrac{(2-\tilde{n})}{(1-\tilde{n})}\ce{[Gly^-]}\beta_2 + \dfrac{(3-\tilde{n})}{(1-\tilde{n})}\ce{[Gly^-]}^2\beta_3
-    \end{equation}
-    \normalsize
-    
-    \begin{figure*}[h]
-       	\centering
-       	\begin{tabular}{ccc}
-       		\includegraphics[width=0.2\linewidth]{images/Single.png} & \includegraphics[width=0.4\linewidth]{images/Double.png} &
-       		\includegraphics[width=0.3\linewidth]{images/Triple.png}
-       	\end{tabular}
-       	\caption{Distintos complejos de glicinato de n\'iquel en soluci\'on. Las esf\'eras rojas representan ox\'igenos, en gris se muestran los carbonos, hidr\'ogenos en blanco, y los \'atomos de nitr\'ogeno en azul.}
-       	\label{fig:ligands}
-    \end{figure*} 
-    
-    Para la realizaci\'on del an\'alisis se toman dos aproximaciones importantes. En primer lugar el coeficiente de actividad $\gamma$ se asume constante a lo largo del experimento dado que la contribuci\'on de los iones distintos al nitrato es despreciable, pues estos u\'ltimos se trabajan con al menos tres \'ordenes de magnitud menos.
-    \begin{equation}
-	    \ce{[H+]} = \dfrac{10^{-pH}}{\gamma_\pm}
-    \end{equation}
-    
-    En segundo lugar las concentraciones iniciales de glicinato y n\'iquel se asumen constantes a lo largo del experimento, esto debido a que el cambio neto de volumen no supera el 5 \% del volumen inicial.
-   
-    
+	
+	En general, el n\'iquel al igual que la mayor\'ia de metales de transici\'on prefiere una geometr\'ia octa\'edrica. Por esta raz\'on se tiene un n\'umero m\'aximo de coordinaci\'on 6, sin embargo como el glicinato act\'ua como un ligando bidentado, es posible alcanzar \'unicamente tres diferentes iones en soluci\'on con constantes de equil\'ibrio $K_1$, $K_2$ y $K_3$, los cuales se muestran en la \autoref{fig:ligands}.
+	
+	\footnotesize
+	\begin{equation*}
+	\begin{array}{cc}
+	\ce{Ni^{2+} + Gly- <=> Ni(Gly)+} & K_1 = \dfrac{\ce{[Ni(Gly)+]}}{\ce{[Ni^{2+}][Gly^-]}}\\
+	\ce{Ni(Gly)+ + Gly- <=> Ni(Gly)_2} & K_2 = \dfrac{\ce{[Ni(Gly)_2]}}{\ce{[Ni(Gly)+][Gly^-]}}\\
+	\ce{Ni(Gly)_2 + Gly- <=> Ni(Gly)_3-} & K_3 = \dfrac{\ce{[Ni(Gly)_3^-]}}{\ce{[Ni(Gly)_2][Gly^-]}}
+	\end{array}
+	\end{equation*}
+	\normalsize
+	
+	Con el objetivo de facilitar los c\'alculos posteriores se introducen las constantes de equilibrio globales:
+	\begin{equation}
+	\beta_n = \prod\limits_{i=1}^{i \leq n} K_i
+	\end{equation}
+	
+	Usando el m\'etodo de J. Bjerrum es posible calcular las constantes globales conociendo la relaci\'on entre las moles de glicinato ligado y el cati\'on libre.
+	\small  
+	\begin{equation}
+	\def\arraystretch{3}
+	\begin{array}{rl}
+	\tilde{n} & = \dfrac{\ce{\beta_1[Gly^-] + 2\beta_2[Gly^-]^2 + 3\beta_3[Gly^-]^3}}{\ce{1 + \beta_1[Gly^-] + \beta_2[Gly^-]^2 + \beta_3[Gly^-]^3}} \\
+	& = \dfrac{\ce{[Gly]}_0 - (1+K_a/\ce{[H+]})(C_H + \ce{[OH^-] - [H+]})}{\ce{[NiCl2]}_0}
+	\end{array}
+	\end{equation}
+	\normalsize
+	
+	Donde $K_a$ es la constante de acidez de la glicina, $C_H$ la concentraci\'on de protones debido al \'acido n\'itrico, y el factor $K_a/\ce{[H+]}(\cdots)$ corresponde con la concentraci\'on de glicina libre \ce{[Gly^-]}. Reescribiendo la ecuaci\'on se obtiene:
+	\footnotesize
+	\begin{equation}
+	\dfrac{\tilde{n}}{(1-\tilde{n})\ce{[Gly^-]}} = \beta_1 + \dfrac{(2-\tilde{n})}{(1-\tilde{n})}\ce{[Gly^-]}\beta_2 + \dfrac{(3-\tilde{n})}{(1-\tilde{n})}\ce{[Gly^-]}^2\beta_3
+	\end{equation}
+	\normalsize
+	
+	\begin{figure*}[h]
+		\centering
+		\begin{tabular}{ccc}
+			\includegraphics[width=0.2\linewidth]{images/Single.png} & \includegraphics[width=0.4\linewidth]{images/Double.png} &
+			\includegraphics[width=0.3\linewidth]{images/Triple.png}
+		\end{tabular}
+		\caption{Distintos complejos de glicinato de n\'iquel en soluci\'on. Las esf\'eras rojas representan ox\'igenos, en gris se muestran los carbonos, hidr\'ogenos en blanco, y los \'atomos de nitr\'ogeno en azul.}
+		\label{fig:ligands}
+	\end{figure*} 
+	
+	Para la realizaci\'on del an\'alisis se toman dos aproximaciones importantes. En primer lugar el coeficiente de actividad $\gamma$ se asume constante a lo largo del experimento dado que la contribuci\'on de los iones distintos al nitrato es despreciable, pues estos u\'ltimos se trabajan con al menos tres \'ordenes de magnitud menos.
+	\begin{equation}
+	\ce{[H+]} = \dfrac{10^{-pH}}{\gamma_\pm}
+	\end{equation}
+	
+	En segundo lugar las concentraciones iniciales de glicinato y n\'iquel se asumen constantes a lo largo del experimento, esto debido a que el cambio neto de volumen no supera el 5 \% del volumen inicial.
+	
+	
 	\section{Metodolog\'ia}
 	Una soluci\'on de 100 mL de NaOH es preparada a partir de \_\_\_ g de la base s\'olida, la soluci\'on se estandariza usando \_\_\_ mL de NaOH en \_\_\_ g de ftalato \'acido de potasio. Se establece la concentraci\'on de la soluci\'on en \_\_\_. Usando \_\_\_ mL de NaOH (\_\_\_ M) y \_\_\_ g de glicina se obtiene el glicinato de sodio, que posteriormente es aforado a 20 mL.
 	
 	Usando un beaker se prepara una soluci\'on que contiene \_\_\_ g de \ce{NiCl_2.6H_2O}, 10 mL de \'acido n\'itrico $0.11\pm0.1$, 100 mL de una soluci\'on de nitrato de potasio previamente preparada con concentraci\'on 0.2015 M, y 90 mL de agua. Con una bureta se adicionan al\'icuotas de 0.2 mL de glicinato de sodio a la soluci\'on hasta completar 10 mL.
-		
+	
 	\section{Resultados y Discusi\'on}
 	Con el objetivo de obtener un valor estimado para la constante de acidez de la glicina se llev\'o a cabo una simulaci\'on de protonaci\'on sobre la mol\'ecula. Con lo cual se obtuvieron 71 puntos que posteriormente fueron usados en una interpolaci\'on c\'ubica con el objetivo de encontrar el valor de pH para el cual el porcentaje de formaci\'on corresponde con 50 \%. Los datos obtenidos de la simulaci\'on con Marvin y el algoritm\'o de interpolaci\'on se encuentran disponibles en \href{https://github.com/jsbarbosa/study-happiness/tree/master/Lab\%20Inorganica/7-Aminoacidos}{\color{blue}GitHub} \footnote{https://github.com/jsbarbosa/study- happiness/tree/master/Lab\%20Inorganica/7-Aminoacidos}.
 	\begin{figure}[h]
@@ -163,8 +163,25 @@
 	\section{Preguntas}
 	\subsection{Dibujar todos los is\'omeros \'opticos y geom\'etricos de los tres complejos de}
 	\subsubsection{\ce{[Ni(Gly^-)]^+}}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width = 0.4\linewidth]{images/Single.png}
+		\caption{\'Unico is\'omero posible}
+	\end{figure}
+	
 	\subsubsection{\ce{[Ni(Gly^-)_2]}}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width = \linewidth]{images/cis_trans.jpg}
+		\caption{Is\'omeros trans y cis.}
+	\end{figure}
+	
 	\subsubsection{\ce{[Ni(Gly^-)_3]^-}}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width = \linewidth]{images/delta_lambda.png}
+		\caption{Is\'omero $\delta$ y $\Lambda$}
+	\end{figure}
 	
 	\subsection{Derivar la ecuaci\'on 11}
 	La glicina se deprotona dando lugar a la siguiente reacci\'on:
@@ -181,40 +198,79 @@
 	
 	Considerando la conservaci\'on de carga en la soluci\'on:
 	\begin{equation}
-		\ce{[Gly^-]} = \ce{[H+] + [Na+] - [OH^-]}
+	\ce{[Gly^-]} = \ce{[H+] + [Na+] - [OH^-]}
 	\end{equation}
 	
 	Aplicando conservaci\'on de la masa:
 	\footnotesize
 	\begin{equation}
-		\ce{[Gly]} = \ce{[Gly_0]-[Gly^-]} = \ce{[Gly_0]} - \left(\ce{[H+] + [Na+] - [OH^-]}\right)
+	\ce{[Gly]} = \ce{[Gly_0]-[Gly^-]} = \ce{[Gly_0]} - \left(\ce{[H+] + [Na+] - [OH^-]}\right)
 	\end{equation}
 	\normalsize
 	
 	\small
 	Reemplazando las ecuaciones anteriores en la \autoref{pKa}.	
 	\begin{equation*}
-		pKa = -\log\ce{[H+]} - \log\left(\dfrac{\ce{[H+] + [Na+] - [OH^-]}}{\ce{[Gly_0]} - \left(\ce{[H+] + [Na+] - [OH^-]}\right)}\right)
+	pKa = -\log\ce{[H+]} - \log\left(\dfrac{\ce{[H+] + [Na+] - [OH^-]}}{\ce{[Gly_0]} - \left(\ce{[H+] + [Na+] - [OH^-]}\right)}\right)
 	\end{equation*}
 	\normalsize
 	
 	\subsection[Se prepara]{Se prepara una disoluci\'on por mezclar de 100 mL de glicina (0.2 M) y 100 mL de \ce{Cu^{2+}} (0.2 M), el pH se ajust\'o a 7 con una soluci\'on de NaOH. Calcule los porcentajes aproximados del ion \ce{Cu^{2+}} original, as\'i como los actuales despu\'es de efectuar la mezcla, \ce{Cu^{2+}}, \ce{CuA+}, y \ce{CuA_2} en la soluci\'on. Use $pK_a$ de 9.60 para la glicina y las siguientes constantes de estabilidad:}
 	\begin{equation*}
-	    \begin{array}{lcrc}
-	        \ce{Cu^{2+} + A-} & \ce{<=>} & \ce{CuA+} & \log K_1 = 8.38\\
-	        \ce{CuA+ + A-} & \ce{<=>} & \ce{CuA_2} & \log K_2 = 6.87 
-	    \end{array}
+	\begin{array}{lcrc}
+	\ce{Cu^{2+} + A-} & \ce{<=>} & \ce{CuA+} & \log K_1 = 8.38\\
+	\ce{CuA+ + A-} & \ce{<=>} & \ce{CuA_2} & \log K_2 = 6.87 
+	\end{array}
 	\end{equation*}
+	
+	Usando las constantes de equilibrio:
+	\begin{equation}
+	\def\arraystretch{3}
+	\begin{array}{cc}
+	K_a = \dfrac{\ce{[A^-][H+]}}{\ce{[HA]}} & \log K_a = 9.60 \\
+	K_1 = \dfrac{\ce{[CuA+]}}{\ce{[Cu+2][A^-]}} & \log K_1 = 8.38 \\
+	K_2 = \dfrac{\ce{[CuA_2]}}{\ce{[CuA+][A^-]}} & \log K_2 = 6.87 \\
+	\end{array}
+	\end{equation}
+	
+	Sustituyendo en las concentraciones de cobre de obtiene:
+	\begin{equation}
+	\begin{array}{c}
+	\ce{[CuA+]} = \ce{K_1K_a}\dfrac{\ce{[Cu^{+2}][HA]}}{\ce{[H+]}}\\
+	\ce{[CuA_2]} =  \ce{K_2K_1K_a^2}\dfrac{\ce{[Cu^{+2}][HA]^2}}{\ce{[H+]^2}}
+	\end{array}
+	\end{equation}
+	
+	Teniendo en cuenta las leyes de conservaci\'on:
+	\begin{equation}
+	\begin{array}{cc}
+	\ce{[Cu^{2+}]_0} = \ce{[Cu^{+2}] + [CuA+] + [CuA_2]} \\
+	\ce{2[Cu^{2+}] + [CuA+] + [H+]} = \ce{[A^-] + [Cl^-]}
+	\end{array}
+	\end{equation}
 	
 	\subsection{Se desea determinar las constantes de formaci\'on ($K_1$, $K_2$ y $K_3$) para los complejos de coordinaci\'on de etilendiamina, a \ce{Ni^{2+}} formando los complejos \ce{[Ni(en)]^{2+}}, \ce{[Ni(en)_2]^{2+}}, \ce{[Ni(en)_3]^{2+}}}
 	\subsubsection{C\'omo determinar\'ia el primer y segundo $pKa$ de la etilendiamina?}
+	Es posible obtener los valores de $pKa$ usando una titulaci\'on potenciom\'etrica. A partir de los valores obtenidos se puede calcular num\'ericamente los puntos de inflexi\'on de las curvas usando segundas derivadas \cite{pka determination}.
+	
 	\subsubsection{Defina estos dos valores de $pKa$. ?`Cu\'al de los dos ser\'ia el m\'as grande?}
+	Sean $Ka_1$ y $Ka_2$ las constantes de acidez de la etilendiamina, donde $Ka_1$ es la de menor valor. Existen dos posibles posiciones de protonaci\'on debido al pH. Existen entonces 3 regiones: a pH b\'asico donde la etilendiamina se encuentra en su forma molecular ($pKa_2$), una regi\'on intermedia en donde una de las dos aminas tiene carga y la \'ultima a pH \'acido donde las dos aminas estar\'an protonadas ($pKa_1$).
+	\begin{scheme}[h]
+		\centering
+		\includegraphics[width=\linewidth]{images/en_pKa.pdf}
+		\caption{Posibles estructuras de la etilendiamina dependiendo del pH.}
+		\label{sch:etilen_pka}
+	\end{scheme}
+	
 	\subsubsection{Cu\'ales titulaciones realizar\'ia para determinar las constantes de estabilidad $K_1$, $K_2$ y $K_3$? Explique brevemente. El procedimiento difiere de lo utilizado en este experimento?}
+	Es posible realizarlo de la misma forma siendo el an\'alisis posterior basado en el m\'etodo de J. Bjerrum, adicionalmente es posible obtener informaci\'on sobre la estructura del complejo usando una titulaci\'on y posterior determinaci\'on en UV-vis, siendo el segundo m\'etodo recomendado para concentraciones m\'as bajas \cite{pka determination}.
+	
 	\subsubsection{Qu\'e valor esperar\'ia sea m\'as grande, el de $K_1$ o el de $K_2$?}
+	Debido a que la facilidad de acomplejamiento con el metal depende de la carga del cati\'on, se espera la misma dependencia que se observa con los complejos de glicinato de n\'iquel. De esta forma $K_1 > K_2$.
 	
 	\subsection{Considere la coordinaci\'on del ligando tridentado iminodiacetato al ion \ce{Cu^{2+}}. Cuando se agrega la forma monoprotonada del iminodiacetato, a una soluci\'on acuosa de \ce{Cu^{2+}}, se establece r\'apidamente el siguiente equilibrio:}
 	\begin{equation}
-	    \ce{Cu^{2+} + HA- <=> CuA + H+}
+	\ce{Cu^{2+} + HA- <=> CuA + H+}
 	\end{equation}
 	
 	\section{Conclusiones}
@@ -222,11 +278,13 @@
 	\phantomsection
 	\bibliographystyle{unsrt}
 	\begin{thebibliography}{9}
-	    \bibitem{Glycine}
-	    \textit{Glycine}; Encyclopedic Reference of Genomics and Proteomics in Molecular Medicine; Springer Berlin Heidelberg: Berlin. Heidelberg, 2006; pp 703.
-	    \bibitem{GlycineHistory}
-	    \textit{Glycine}; Encyclopedia of Astrobiology; Springer Berlin Heidelberg: Berlin. Heidelberg, 2015; pp 994.
-	    \bibitem{Nickel}
-	    Kaim, W.; Schwederski, B.; Klein, A. \textit{Bioinorganic chemistry: Inorganic elements in the chemistry of life - an introduction and guide}, 2nd ed.; Wiley-Blackwell (an imprint of John Wiley \& Sons Ltd): Oxford, United Kingdom, \textbf{2011}; p 300.
+		\bibitem{Glycine}
+		\textit{Glycine}; Encyclopedic Reference of Genomics and Proteomics in Molecular Medicine; Springer Berlin Heidelberg: Berlin. Heidelberg, 2006; pp 703.
+		\bibitem{GlycineHistory}
+		\textit{Glycine}; Encyclopedia of Astrobiology; Springer Berlin Heidelberg: Berlin. Heidelberg, 2015; pp 994.
+		\bibitem{Nickel}
+		Kaim, W.; Schwederski, B.; Klein, A. \textit{Bioinorganic chemistry: Inorganic elements in the chemistry of life - an introduction and guide}, 2nd ed.; Wiley-Blackwell (an imprint of John Wiley \& Sons Ltd): Oxford, United Kingdom, \textbf{2011}; p 300.
+		\bibitem{pka determination}
+		Babi\'c, S.; Horvat, A. J. M.; Mutavdzic Pavlovic, D.; Kastelan-Macan, M. Determination of pKa values of active pharmaceutical ingredients. \textit{TrAC Trends in Analytical Chemistry}. Published Online: Dec 2007, 26 (\textit{11}), 1043–1061.
 	\end{thebibliography}
 \end{document}
