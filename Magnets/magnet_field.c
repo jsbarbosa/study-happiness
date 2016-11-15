@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 	}
 	
     /*
-        second magnet variables related
+        second magnet variables relate
     */
 	n = 0;
 	

@@ -71,7 +71,7 @@
 %----------------------------------------------------------------------------------------
 \Abstract
 {
-	Las constantes de equilibrio para los distintos complejos de n\'iquel y glicinato se determinan en $K_1=$ M$^{-1}$, $K_2=$ M$^{-1}$, $K_3=$ M$^{-1}$. Los valores son obtenidos usando el m\'etodo de Rossotti de mediciones de pH. El coeficiente de actividad se asume constante y fijo por la concentraci\'on de nitrato de potasio en soluci\'on. Las constantes son analizadas en funci\'on del tama\~no de las mol\'eculas e interacciones electroest\'aticas.
+	Las constantes de equilibrio para los distintos complejos de n\'iquel y glicinato se determinan en $K_1=4.99\times10^8$ M$^{-1}$, $K_2=5.03\times10^{12}$ M$^{-1}$, $K_3=4.48\times10^{17}$ M$^{-1}$. Los valores son obtenidos usando el m\'etodo de Bjerrum de mediciones de pH. El coeficiente de actividad se calcula para cada medici\'on de pH. El orden de las constantes es analizada en funci\'on del efecto quelato. Se determinan como estables los complejos de glicinato de n\'iquel, usando como referencia las constantes de equilibrio obtenidas experimentalmente.
 }
 %----------------------------------------------------------------------------------------
 
@@ -96,35 +96,36 @@
 	
 	En general, el n\'iquel al igual que la mayor\'ia de metales de transici\'on prefiere una geometr\'ia octa\'edrica. Por esta raz\'on se tiene un n\'umero m\'aximo de coordinaci\'on 6, sin embargo como el glicinato act\'ua como un ligando bidentado, es posible alcanzar \'unicamente tres diferentes iones en soluci\'on con constantes de equil\'ibrio $K_1$, $K_2$ y $K_3$, los cuales se muestran en la \autoref{fig:ligands}.
 	
-	\footnotesize
-	\begin{equation*}
-	\begin{array}{cc}
-	\ce{Ni^{2+} + Gly- <=> Ni(Gly)+} & K_1 = \dfrac{\ce{[Ni(Gly)+]}}{\ce{[Ni^{2+}][Gly^-]}}\\
-	\ce{Ni(Gly)+ + Gly- <=> Ni(Gly)_2} & K_2 = \dfrac{\ce{[Ni(Gly)_2]}}{\ce{[Ni(Gly)+][Gly^-]}}\\
-	\ce{Ni(Gly)_2 + Gly- <=> Ni(Gly)_3-} & K_3 = \dfrac{\ce{[Ni(Gly)_3^-]}}{\ce{[Ni(Gly)_2][Gly^-]}}
-	\end{array}
-	\end{equation*}
+	\scriptsize
+	\begin{equation}\label{eq: constants}
+	\def\arraystretch{3}
+		\begin{array}{cc}
+			\ce{Ni^{2+} + Gly- <=> Ni(Gly)+} & K_1 = \dfrac{\ce{[Ni(Gly)+]}}{\ce{[Ni^{2+}][Gly^-]}}\\
+			\ce{Ni(Gly)+ + Gly- <=> Ni(Gly)_2} & K_2 = \dfrac{\ce{[Ni(Gly)_2]}}{\ce{[Ni(Gly)+][Gly^-]}}\\
+			\ce{Ni(Gly)_2 + Gly- <=> Ni(Gly)_3-} & K_3 = 		\dfrac{\ce{[Ni(Gly)_3^-]}}{\ce{[Ni(Gly)_2][Gly^-]}}
+		\end{array}
+	\end{equation}
 	\normalsize
 	
 	Con el objetivo de facilitar los c\'alculos posteriores se introducen las constantes de equilibrio globales:
 	\begin{equation}
-	\beta_n = \prod\limits_{i=1}^{i \leq n} K_i
+		\beta_n = \prod\limits_{i=1}^{i \leq n} K_i
 	\end{equation}
 	
 	Usando el m\'etodo de J. Bjerrum es posible calcular las constantes globales conociendo la relaci\'on entre las moles de glicinato ligado y el cati\'on libre.
 	\small  
-	\begin{equation}
+	\begin{equation}\label{eq: fit}
 	\def\arraystretch{3}
-	\begin{array}{rl}
-	\tilde{n} & = \dfrac{\ce{\beta_1[Gly^-] + 2\beta_2[Gly^-]^2 + 3\beta_3[Gly^-]^3}}{\ce{1 + \beta_1[Gly^-] + \beta_2[Gly^-]^2 + \beta_3[Gly^-]^3}} \\
-	& = \dfrac{\ce{[Gly]}_0 - (1+K_a/\ce{[H+]})(C_H + \ce{[OH^-] - [H+]})}{\ce{[NiCl2]}_0}
-	\end{array}
+		\begin{array}{rl}
+			\tilde{n} & = \dfrac{\ce{\beta_1[Gly^-] + 2\beta_2[Gly^-]^2 + 3\beta_3[Gly^-]^3}}{\ce{1 + \beta_1[Gly^-] + \beta_2[Gly^-]^2 + \beta_3[Gly^-]^3}} \\
+			& = \dfrac{\ce{[Gly]}_0 - (1+K_a/\ce{[H+]})(C_H + \ce{[OH^-] - [H+]})}{\ce{[NiCl2]}_0}
+		\end{array}
 	\end{equation}
 	\normalsize
 	
 	Donde $K_a$ es la constante de acidez de la glicina, $C_H$ la concentraci\'on de protones debido al \'acido n\'itrico, y el factor $K_a/\ce{[H+]}(\cdots)$ corresponde con la concentraci\'on de glicina libre \ce{[Gly^-]}. Reescribiendo la ecuaci\'on se obtiene:
 	\footnotesize
-	\begin{equation}
+	\begin{equation}\label{eq: Rossetti}
 	\dfrac{\tilde{n}}{(1-\tilde{n})\ce{[Gly^-]}} = \beta_1 + \dfrac{(2-\tilde{n})}{(1-\tilde{n})}\ce{[Gly^-]}\beta_2 + \dfrac{(3-\tilde{n})}{(1-\tilde{n})}\ce{[Gly^-]}^2\beta_3
 	\end{equation}
 	\normalsize
@@ -154,14 +155,109 @@
 	
 	\section{Resultados y Discusi\'on}
 	
+	Los resultados obtenidos usando la titulaci\'on potenciom\'etrica se muestran en la \autoref{fig: pH}. Es necesario tener en cuenta que el pH corresponde con la actividad del hidr\'ogeno en soluci\'on, raz\'on por lo cual se debe conocer la fuerza i\'onica en soluci\'on.
+	\begin{equation}\label{eq: strength}
+		\mu = \dfrac{1}{2}\sum\limits_{i=1}^{3} M_iZ_i^2
+	\end{equation}
+	\pagebreak
 	
-	Con el objetivo de obtener un valor estimado para la constante de acidez de la glicina se llev\'o a cabo una simulaci\'on de protonaci\'on sobre la mol\'ecula. Con lo cual se obtuvieron 71 puntos que posteriormente fueron usados en una interpolaci\'on c\'ubica con el objetivo de encontrar el valor de pH para el cual el porcentaje de formaci\'on corresponde con 50 \%. Los datos obtenidos de la simulaci\'on con Marvin y el algoritm\'o de interpolaci\'on se encuentran disponibles en \href{https://github.com/jsbarbosa/study-happiness/tree/master/Lab\%20Inorganica/7-Aminoacidos}{\color{blue}GitHub} \footnote{https://github.com/jsbarbosa/study- happiness/tree/master/Lab\%20Inorganica/7-Aminoacidos}.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\linewidth]{images/pH.pdf}
+		\caption{Resultados obtenidos para la titulaci\'on de la glicina en soluci\'on con Ni(II).}
+		\label{fig: pH}
+	\end{figure}
+	
+	La fuerza i\'onica se calcula a partir de la concentraci\'on de las esp\'ecies i\'onicas en soluci\'on y su carga. En este caso el nitrato de potasio, el cloruro de n\'iquel y el \'acido n\'itrico. La fuerza i\'onica a su vez permite conocer el coeficiente de actividad del hidr\'ogeno $\gamma_\pm$ haciendo uso de la ecuaci\'on de Debye–H\"uckel:
+	\begin{equation}\label{eq: activity}
+		-\log\gamma_\pm = \dfrac{Z_1 Z_2 \sqrt{\mu}}{2\left(1+\sqrt{\mu}\right)}
+	\end{equation}
+	
+	Usando las \autoref{eq: strength} y \autoref{eq: activity} se obtiene la concentraci\'on de protones en la soluci\'on. El coeficiente de actividad promedio, junto con la fuerza i\'onica se muestran en la \autoref{fig: versus}, adem\'as de la relaci\'on entre \ce{[H^+]} y \ce{[OH^{-}]}, los \'ultimos son obtenidos usando la constante de autoionizaci\'on del agua a $\mu = 0.1$ M:
+	\begin{equation}
+		\def\arraystretch{2}
+		\begin{array}{rl}
+			\ce{[H+]} = & \dfrac{10^{-pH}}{\gamma_\pm} = 10^{\left(\frac{Z_1Z_2\sqrt{\mu}}{2\left(1+\sqrt{\mu}\right)} - pH\right)} \\
+			\ce{[OH^{-}]} = & \dfrac{K_w}{\ce{[H+]}}
+		\end{array}
+	\end{equation}
+	
+	\begin{figure*}[h]
+		\centering
+		\begin{tabular}{cc}
+			\includegraphics[width=0.5\linewidth]{images/ionic_strength.pdf} & \includegraphics[width=0.5\linewidth]{images/HOH.pdf}
+		\end{tabular}
+		\caption{A la izquierda, relaci\'on entre la fuerza i\'onica, y el coeficiente de actividad promedio en funci\'on del volumen agregado. A la derecha se encuentra la relaci\'on entre los protones en soluci\'on y los iones hidroxilos en funci\'on del volumen de glicina.}
+		\label{fig: versus}
+	\end{figure*}
+	\pagebreak
+	
+	En la \autoref{fig: versus} se observa que la variaci\'on m\'axima de la fuerza i\'onica es de cerca del 11 \%, raz\'on por la cual se recomienda calcular el valor de la misma para cada adici\'on de glicina a la soluci\'on.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=\linewidth]{images/pka_sim.pdf}
 		\caption{Simulaci\'on de la constante de acidez de la glicina.}
 	\end{figure}
 	
+	Como fue discutido en la introducci\'on existen dos m\'etodos distintos para calcular las constantes de equilibrio de los complejos de glicinato de n\'iquel. Ambos se derivan de la \autoref{eq: fit} que depende de la constante de acidez de la glicina. Dado que este valor no se midi\'o experimentalmente, se llev\'o a cabo una simulaci\'on. Los puntos obtenidos fueron usados en una interpolaci\'on c\'ubica con el objetivo de encontrar el valor de pH para el cual el porcentaje de formaci\'on corresponde con 50 \%. Los datos de la simulaci\'on, los datos experimentales y la totalidad del algoritm\'o usado en el an\'alisis de los datos se encuentran disponibles en \href{https://github.com/jsbarbosa/study-happiness/tree/master/Lab\%20Inorganica/7-Aminoacidos}{\color{blue}GitHub} \footnote{https://github.com/jsbarbosa/study-happiness/tree/master/Lab\%20Inorganica/7-Aminoacidos}.
+	
+	Para el m\'etodo de Bjerrum, tambi\'en es necesario realizar una interpolaci\'on de los datos con el objetivo de obtener los valores exactos para los cuales \ce{[Gly^{-}]} da lugar a $\tilde{n} = 1/2, 3/2, 5/2$, como se muestra en la \autoref{fig: Bjerrum}, siendo estos valores aproximados para relaciones de metal ligando 1:1, 1:2 y 1:3 en el complejo. Usando la \autoref{eq: constants} y la relaci\'on metal - ligando se obtiene:
+	\begin{equation}
+		K_i = \dfrac{1}{\ce{[Gly^-]}(\tilde{n} = (2i-1)/2)^i}
+	\end{equation}
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\linewidth]{images/Bjerrum.pdf}
+		\caption{Relaci\'on entre las moles de glicinato ligado y n\'iquel en soluci\'on en funci\'on de la concentraci\'on de glicinato en soluci\'on.}
+		\label{fig: Bjerrum}
+	\end{figure}
+	
+	\begin{figure*}[h]
+		\centering
+		\includegraphics[width=\linewidth]{images/Rossotti.pdf}
+		\caption{Regresiones propias del m\'etodo de Rossetti. En la gr\'afica izquierda se muestra la funci\'on truncada al primer orden, a la derecha los t\'erminos de \'orden superior.}
+		\label{fig: Rossetti}
+	\end{figure*}
+	
+	Los valores obtenidos para las constantes se muestra en la \autoref{tb: Bjerrum}. En ella se puede observar un resultado aparentemente contradictorio en la forma como se comporta el n\'iquel en presencia de glicinato, puesto que se obtiene $K_3 > K_2 > K_1$.
+	\pagebreak
+	
+	\begin{table}[h]
+		\centering
+		\caption{Constantes de equilibrio obtenidas por el m\'etodo de Bjerrum.}
+		\begin{tabular}{cc}
+			\hline
+			 & $K_i$ (M$^{-1}$) \\
+			\hline
+			$K_1$ & $4.99\times10^{8}$ \\
+			$K_2$ & $5.03\times10^{12}$ \\
+			$K_3$ & $4.48\times10^{17}$ \\
+			\hline
+		\end{tabular}
+		\label{tb: Bjerrum}
+	\end{table}
+	
+	En el caso del modelo de Rossetti se usa la \autoref{eq: Rossetti}, asumiendo que $K_1 \gg K_2 \gg K_3$ es posible truncar la funci\'on para calcular el t\'ermino de primer orden. Una vez calculado este valor es posible calcular el t\'ermino de segundo y tercer orden. Este proceso se muestra en la \autoref{fig: Rossetti}, del intercepto de la primera gr\'afica es posible extraer $\beta_1 = K_1$, de la segunda gr\'afica el intercepto corresponde con $\beta_2$ y la pendiente con $\beta_3$.
+	\begin{table}[h]
+		\centering
+		\caption{Constantes de equilibrio obtenidas por el m\'etodo de Rossetti.}
+		\begin{tabular}{cc}
+			\hline
+			& $K_i$ (M$^{-1}$) \\
+			\hline
+			$K_1$ & $(5.4\pm 0.2)\times10^{8}$ \\
+			$K_2$ & $(3.8\pm 3.6)\times10^{4}$ \\
+			$K_3$ & $(3.7\pm 0.5)\times10^{7}$ \\
+			\hline
+		\end{tabular}
+		\label{tb: Rossetti}
+	\end{table}
+	
+	Los resultados obtenidos con el m\'etodo de Rossetti son a\'un m\'as contradictorios, pues se obtiene $K_1 > K_3 \gg K_2$. En este sentido a pesar de que el m\'etodo de Bjerrum constituye un m\'etodo aproximado, no depende de que el orden de las constantes de equilibrio sea descendiente, aunque tiene la ventaja de proveer la incertidumbre del m\'etodo. 
+	
+	Sin embargo el orden de las constantes de equilibrio obtenidas por el m\'etodo de Bjerrum a\'un carece de explicaci\'on. Si se tiene en cuenta la \autoref{eq: constants} se puede observar que constantes de equilibrio m\'as grandes implican que la reacci\'on se ve desplazada hacia los productos. En este sentido que la constante de equilibrio $K_3$ sea mayor a $K_2$ y $K_1$, sugiere un probable efecto quelato. A la luz de los resultados se cree que la naturaleza del n\'iquel en soluci\'on es tal que para 3 ligandos glicinato libres, el n\'iquel preferir\'a que un s\'olo cati\'on se coordine con todos ellos a que estos se repartan uniformemente. Lo anterior siendo consecuencia del efecto quelato.
+
 	\section{Preguntas}
 	\subsection{Dibujar todos los is\'omeros \'opticos y geom\'etricos de los tres complejos de}
 	\subsubsection{\ce{[Ni(Gly^-)]^+}}
@@ -178,10 +274,11 @@
 		\caption{Is\'omeros trans y cis.}
 	\end{figure}
 	
+	\pagebreak
 	\subsubsection{\ce{[Ni(Gly^-)_3]^-}}
-	\begin{figure}[h]
+	\begin{figure}[h!]
 		\centering
-		\includegraphics[width = \linewidth]{images/delta_lambda.png}
+		\includegraphics[width = 0.7\linewidth]{images/delta_lambda.png}
 		\caption{Is\'omero $\delta$ y $\Lambda$}
 	\end{figure}
 	
@@ -270,12 +367,8 @@
 	\subsubsection{Qu\'e valor esperar\'ia sea m\'as grande, el de $K_1$ o el de $K_2$?}
 	Debido a que la facilidad de acomplejamiento con el metal depende de la carga del cati\'on, se espera la misma dependencia que se observa con los complejos de glicinato de n\'iquel. De esta forma $K_1 > K_2$.
 	
-	\subsection{Considere la coordinaci\'on del ligando tridentado iminodiacetato al ion \ce{Cu^{2+}}. Cuando se agrega la forma monoprotonada del iminodiacetato, a una soluci\'on acuosa de \ce{Cu^{2+}}, se establece r\'apidamente el siguiente equilibrio:}
-	\begin{equation}
-	\ce{Cu^{2+} + HA- <=> CuA + H+}
-	\end{equation}
-	
 	\section{Conclusiones}
+	Dos m\'etodos distintos fueron usados para calcular los valores de las constantes de equilibrio para los complejos con glicinato de n\'iquel. El an\'alisis de los resultados presentados por los m\'etodos sugiere al m\'etodo de Bjerrum como m\'as preciso debido a los valores obtenidos para las constantes de equilibrio, $K_1 = 4.99\times10^8$, $K_2 = 5.03\times10^{12}$, $K_3 = 4.48\times10^{17}$ M$^{-1}$. El orden presentado por las constantes es atribu\'ido a el efecto quelato presentado por los ligandos glicinato. Para ambos m\'etodos se logra establecer que los complejos de glicinato de n\'iquel presentan una estabilidad considerable con constantes de equilibrio con $pK > 4$.
 	
 	\phantomsection
 	\bibliographystyle{unsrt}
