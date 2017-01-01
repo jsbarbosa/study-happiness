@@ -38,8 +38,7 @@ def main():
 
     
     api = facebook.GraphAPI(access_token)
-        
-    api.put_object("me", "feed", message = "Test")
+
     api.put_object("me", "feed", message=message,  
                              link="https://github.com/jsbarbosa/study-happiness/blob/master/facebook-post.py",  
                              picture="http://www.ecorobotix.com/old/wp-content/uploads/2016/01/2016.png",    
