@@ -40,8 +40,6 @@
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
                                        % English language/hyphenation
 \usepackage[protrusion=true,expansion=true]{microtype}  
-   
-
 
 %%% Maketitle metadata
 \newcommand{\horrule}[1]{\rule{\linewidth}{#1}}     % Horizontal rule
@@ -62,7 +60,7 @@
 }
 \date{}
 
-\lstset{keywordstyle=\color{blue}, basicstyle=\footnotesize, frame=single, language=Python}
+\lstset{keywordstyle=\color{blue}, basicstyle=\scriptsize, frame=single, language=Python}
 
 %%% Begin document
 \begin{document}
@@ -95,10 +93,17 @@ Usando el m\'etodo de Euler para resolver num\'ericamente se obtiene:
 \end{equation}
 
 El sistema de ecuaciones diferenciales es resuelto usando como condiciones iniciales para todos los casos $x(0) = 1$ m y $\dot{x}(0) = 1$ m/s. La constante $k$ var\'ia entre 0.1 y 1 s$^{-2}$. Para todos los casos $dt = 0.1$ s y el n\'umero de puntos es $N = 1000$. 
-\lstinputlisting[]{plotter.py}
+\lstinputlisting{plotter.py}
 \begin{center}
-	\includegraphics[width=0.9\linewidth]{plot.pdf}
+	\includegraphics[width=0.8\linewidth]{plot.pdf}
 \end{center}
+
+La soluci\'on anal\'itica a la ecuaci\'on es de la forma:
+\begin{equation}
+	x(t) = A\cos\left(\sqrt{k}t\right) + B\sin\left(\sqrt{k}t\right)
+\end{equation}
+
+Lo anterior implica que la frecuencia angular $\omega = \sqrt{k}$, por lo cual en la gr\'afica izquierda se observa que para valores de $k$ peque\~nos se tienen frecuencias cortas. En la gr\'afica derecha se tiene la fase para distintos valores de $k$, los cuales presentan nodos en m\'ultiplos enteros de $\pi$.
 
 \end{document}
               
