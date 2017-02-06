@@ -68,6 +68,4 @@ B = np.array([1, 0, 1])
 x1 = eliminacion_gaussiana(A1, B)
 x2 = eliminacion_gaussiana(A2, B)
 
-A = np.linalg.solve(A1, B)
-print(A)
-print("A1 = %s, A2 = %s"%(x1, x2))
+print(np.linalg.det(A1))
