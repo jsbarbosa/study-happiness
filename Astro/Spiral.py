@@ -35,6 +35,6 @@ def update(i):
     return points,
     
 ani = FuncAnimation(fig, update, interval=frames, frames = frames)
-ani.save('ani.gif', writer='imagemagick')
+ani.save('ani.gif', writer='imagemagick', dpi=72)
 
 

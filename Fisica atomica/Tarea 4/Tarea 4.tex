@@ -34,7 +34,9 @@
 \usepackage{fourier}
 \usepackage{listings}
 \usepackage[T1]{fontenc}
-\usepackage[english]{babel}
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+\usepackage{hyperref}
 \usepackage[pdftex]{graphicx}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
@@ -94,48 +96,28 @@ Usando el m\'etodo de Euler para resolver num\'ericamente se obtiene:
 	\end{matrix}
 \end{equation}
 
-El sistema de ecuaciones diferenciales es resuelto en C usando $N = 6000001$ puntos, $dx = 0.000001$, para $\omega = {1, 5}$. Las unidades usadas son arbitrarias tales que $\hbar^2 = m = 1$. Posteriormente se usa un algoritmo en Python para graficar las soluciones.
+El sistema de ecuaciones diferenciales es resuelto en C usando $N = 100000$ puntos, $dx = 0.0001$, para $\omega = 0.4, 0.6, 0.8, 1.0$. Las unidades usadas son arbitrarias tales que $\hbar^2 = m = 1$. Posteriormente se usa un algoritmo en Python para graficar las soluciones.
 
 \newpage
 \lstinputlisting[language=C]{seeker.c}
 \lstinputlisting{plotter.py}
-\begin{center}
-	\includegraphics[width=\linewidth]{plot.pdf}
-\end{center}
-\begin{center}
-	\includegraphics[width=\linewidth]{energies.pdf}
-\end{center}
-
-La energ\'ia depende del cuadrado de $n$ como n\'umero cu\'antico. Resultado an\'alogo al de un pozo de potencial infinito. La soluci\'on anal\'itica a la ecuaci\'on es de la forma:
-\begin{equation}
-\begin{array}{c}
-k_{even} = \kappa\tan\dfrac{\kappa L}{2} = \sqrt{\beta^2 - \kappa^2} \\
-k_{odd} = -\dfrac{\kappa}{\tan\frac{\kappa L}{2}} = \sqrt{\beta^2 - \kappa^2}\\
-\end{array}
-\end{equation}
-\begin{equation}
-\begin{array}{c}
-\Psi_{II_{even}}(x) = F\cos(\kappa x)\\
-\Psi_{II_{odd}}(x) = F\sin(\kappa x)
-\end{array}
-\end{equation}
-
-\begin{table}[h]
+\newpage
+\begin{figure}[ht]
 	\centering
-	\begin{tabular}{cc}
-		\hline
-		$n$ & E \\
-		\hline
-		1 & 2.030 \\
-		2 & 8.120 \\
-		3 & 18.170 \\
-		4 & 32.150 \\
-		5 & 49.780 \\
-		6 & 70.520 \\
-		\hline
-	\end{tabular}
-\end{table}
+	\includegraphics[width=0.8\linewidth]{plot.pdf}
+	\caption{Funciones de onda con mejores comportamientos asist\'oticos.}
+	\label{fig:waves}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\linewidth]{energies.pdf}
+	\caption{Energ\'ia en funci\'on de $n$, para distintos valores de $\omega$.}
+	\label{fig:energies}
+\end{figure}
 
-Finalmente para el caso con $E > V_0$ se obtienen soluciones oscilantes para toda regi\'on del espacio. Para las regiones con $V = V_0$ la amplitud se ve reforzada.
+En la \autoref{fig:waves} se muestra las funciones de onda para las cuales se considera convergencia en el algoritmo en C, las funciones son simuladas de $x=0$ hasta $x=10$, la l\'inea punteada corresponde por simetr\'ia con $x<0$. En la \autoref{fig:energies} se muestran los valores que adquiere la energ\'ia para distintos valores de $n$ y $\omega$. Al observar las regresiones lineales se puede establecer la siguiente relaci\'on.
+\begin{equation}
+	E_{n\omega_i} \propto \omega_in \qquad \implies \qquad E_{n\omega} \propto \omega n
+\end{equation}
 \end{document}
               
