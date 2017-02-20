@@ -19,13 +19,13 @@ def galaxy(arms = 5):
     return x, y
 
 x, y = galaxy()   
-frames = 60
+frames = 120
 phi = 2*np.pi/frames
 
 fig, ax = plt.subplots(facecolor='black')
 ax.set_axis_off()
 ax.set_facecolor('black')
-points, = ax.plot(x, y, "o", ms=0.1, c="w")
+points, = ax.plot(x, y, "o", ms=0.1, c="black")
 ax.set_xlim(-2, 2)
 ax.set_ylim(-2, 2)
 def update(i):
@@ -34,9 +34,7 @@ def update(i):
     points.set_data(xt, yt)
     return points,
     
-ani = FuncAnimation(fig, update, interval=60, frames = frames)
-#plt.show()
+ani = FuncAnimation(fig, update, interval=frames, frames = frames)
 ani.save('ani.gif', writer='imagemagick')
-plt.show()
 
 

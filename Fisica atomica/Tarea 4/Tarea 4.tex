@@ -1,0 +1,141 @@
+              
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX Example: Project Report
+%
+% Source: http://www.howtotex.com
+%
+% Feel free to distribute this example, but please keep the referral
+% to howtotex.com
+% Date: March 2011 
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Edit the title below to update the display in My Documents
+%\title{Project Report}
+%
+%%% Preamble
+\documentclass[paper=letter, fontsize=11pt]{scrartcl}
+\usepackage{url}
+\usepackage{color}
+\usepackage{fourier}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+                                       % English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype}  
+
+%%% Maketitle metadata
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}     % Horizontal rule
+
+\title{
+        %\vspace{-1in}  
+        \usefont{OT1}{bch}{b}{n}
+        \normalfont \normalsize \textsc{Universidad de los Andes, Departamento de F\'isica \\
+        F\'isica at\'omica} \\ [25pt]
+        \horrule{0.5pt} \\[0.4cm]
+        \huge Oscilador arm\'onico \\
+        \horrule{2pt} \\[0.5cm]
+}
+\author{
+        \normalfont                                 \normalsize
+        Juan Barbosa, 201325901\\[-3pt]      \normalsize
+        Febrero 23, 2017
+}
+\date{}
+
+\lstset{keywordstyle=\color{blue}, basicstyle=\scriptsize, frame=single, language=Python}
+
+%%% Begin document
+\begin{document}
+\maketitle
+
+\[
+\boxed{-\dfrac{\hbar^2}{2m}\nabla^2\Psi(x) + V(x)\Psi(x) = E\Psi(x)}
+\]
+
+Para un oscilador arm\'onico la energ\'ia potencial se escribe:
+\begin{equation}
+	V(x) = \dfrac{1}{2}kx^2 = \dfrac{1}{2}m\omega^2x^2
+\end{equation}
+
+La ecuaci\'on de Schr\"odinger se escribe de la forma:
+\begin{equation}
+	\dfrac{d^2}{dx^2}\Psi(x) = \ddot{\Psi}(x) =  \dfrac{2m}{\hbar^2}\left(\dfrac{1}{2}m\omega^2x^2-E\right)\Psi(x)
+\end{equation}
+
+La soluci\'on a la ecuaci\'on anterior debe cumplir que para $x = \pm\infty$, $\Psi(x) = 0$. Las soluciones anal\'iticas usan los polinomios de Hermite.
+\begin{equation}
+	\Psi_n(x) = \dfrac{1}{\sqrt{2^nn!}}\left(\dfrac{m\omega}{\pi\hbar}\right)^{1/4}e^{-\frac{m\omega x^2}{2\hbar}}H_n\left(\sqrt{\dfrac{m\omega}{\hbar}x}\right)
+	\qquad \text{donde} \qquad	H_n(x) = (-1)^ne^{x^2}\dfrac{d^n}{dx^n}e^{-x^2}
+\end{equation}
+
+Usando el m\'etodo de Euler para resolver num\'ericamente se obtiene:
+\begin{equation}
+	\begin{matrix}
+	\dot{\Psi}_n = \dot{\Psi}_{n-1} + \ddot{\Psi}_{n-1}\Delta x \\
+	\Psi_n = \Psi_{n-1} + \dot{\Psi}_n\Delta x
+	\end{matrix}
+\end{equation}
+
+El sistema de ecuaciones diferenciales es resuelto en C usando $N = 6000001$ puntos, $dx = 0.000001$, para $\omega = {1, 5}$. Las unidades usadas son arbitrarias tales que $\hbar^2 = m = 1$. Posteriormente se usa un algoritmo en Python para graficar las soluciones.
+
+\newpage
+\lstinputlisting[language=C]{seeker.c}
+\lstinputlisting{plotter.py}
+\begin{center}
+	\includegraphics[width=\linewidth]{plot.pdf}
+\end{center}
+\begin{center}
+	\includegraphics[width=\linewidth]{energies.pdf}
+\end{center}
+
+La energ\'ia depende del cuadrado de $n$ como n\'umero cu\'antico. Resultado an\'alogo al de un pozo de potencial infinito. La soluci\'on anal\'itica a la ecuaci\'on es de la forma:
+\begin{equation}
+\begin{array}{c}
+k_{even} = \kappa\tan\dfrac{\kappa L}{2} = \sqrt{\beta^2 - \kappa^2} \\
+k_{odd} = -\dfrac{\kappa}{\tan\frac{\kappa L}{2}} = \sqrt{\beta^2 - \kappa^2}\\
+\end{array}
+\end{equation}
+\begin{equation}
+\begin{array}{c}
+\Psi_{II_{even}}(x) = F\cos(\kappa x)\\
+\Psi_{II_{odd}}(x) = F\sin(\kappa x)
+\end{array}
+\end{equation}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{cc}
+		\hline
+		$n$ & E \\
+		\hline
+		1 & 2.030 \\
+		2 & 8.120 \\
+		3 & 18.170 \\
+		4 & 32.150 \\
+		5 & 49.780 \\
+		6 & 70.520 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Finalmente para el caso con $E > V_0$ se obtienen soluciones oscilantes para toda regi\'on del espacio. Para las regiones con $V = V_0$ la amplitud se ve reforzada.
+\end{document}
+              
