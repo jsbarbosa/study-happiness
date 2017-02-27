@@ -50,14 +50,14 @@
 %----------------------------------------------------------------------
 %	MARGINS	
 %----------------------------------------------------------------------
-	  	  
+
 \RequirePackage[left=2cm,%
 right=2cm,%
 top=2.25cm,%
 bottom=2.25cm,%
 headheight=11pt,%
 letterpaper]{geometry}%
-				
+
 %----------------------------------------------------------------------
 %	FIGURES AND TABLES CAPTIONS
 %----------------------------------------------------------------------
@@ -67,7 +67,7 @@ labelsep=period,%
 justification=raggedright]{caption}
 \setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{0pt}
-				
+
 %----------------------------------------------------------------------
 %	PAGE HEADER
 %----------------------------------------------------------------------
@@ -92,34 +92,34 @@ justification=raggedright]{caption}
 
 \RequirePackage[explicit]{titlesec}
 \titleformat{\section}
-  {\color{color1}\large\sffamily\bfseries}
-  {}
-  {0em}
-  {\colorbox{color2!0}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{$\blacksquare\quad$\scshape #1}}}
-  []
+{\color{color1}\large\sffamily\bfseries}
+{}
+{0em}
+{\colorbox{color2!0}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{$\blacksquare\quad$\scshape #1}}}
+[]
 \titleformat{name=\section,numberless}
-  {\color{color1}\large\sffamily\bfseries}
-  {}
-  {0em}
-  {\colorbox{color2!0}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{$\blacksquare\quad$\scshape #1}}}
-  []  
+{\color{color1}\large\sffamily\bfseries}
+{}
+{0em}
+{\colorbox{color2!0}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{$\blacksquare\quad$\scshape #1}}}
+[]  
 \titleformat{\subsection}
-  {\color{color1}\sffamily\bfseries}
-  {\thesubsection}
-  {0.5em}
-  {#1}
-  []
+{\color{color1}\sffamily\bfseries}
+{\thesubsection}
+{0.5em}
+{#1}
+[]
 \titleformat{\subsubsection}
-  {\sffamily\small\bfseries}
-  {\thesubsubsection}
-  {0.5em}
-  {#1}
-  []    
+{\sffamily\small\bfseries}
+{\thesubsubsection}
+{0.5em}
+{#1}
+[]    
 \titleformat{\paragraph}[runin]
-  {\sffamily\small\bfseries}
-  {}
-  {0em}
-  {#1} 
+{\sffamily\small\bfseries}
+{}
+{0em}
+{#1} 
 \titlespacing*{\section}{0pc}{3ex \@plus4pt \@minus3pt}{5pt}
 \titlespacing*{\subsection}{0pc}{2.5ex \@plus3pt \@minus2pt}{0pt}
 \titlespacing*{\subsubsection}{0pc}{2ex \@plus2.5pt \@minus1.5pt}{0pt}
@@ -135,45 +135,45 @@ justification=raggedright]{caption}
 \usepackage{titletoc}
 \contentsmargin{0cm}
 \titlecontents{section}[\tocsep]
-  {\addvspace{4pt}\small\bfseries\sffamily}
-  {\contentslabel[\thecontentslabel]{\tocsep}}
-  {}
-  {\hfill\thecontentspage}
-  []
+{\addvspace{4pt}\small\bfseries\sffamily}
+{\contentslabel[\thecontentslabel]{\tocsep}}
+{}
+{\hfill\thecontentspage}
+[]
 \titlecontents{subsection}[\tocsep]
-  {\addvspace{2pt}\sffamily}
-  {\contentslabel[\thecontentslabel]{\tocsep}}
-  {}
-  {\ \titlerule*[.5pc]{.}\ \thecontentspage}
-  []
+{\addvspace{2pt}\sffamily}
+{\contentslabel[\thecontentslabel]{\tocsep}}
+{}
+{\ \titlerule*[.5pc]{.}\ \thecontentspage}
+[]
 \titlecontents*{subsubsection}[\tocsep]
-  {\footnotesize\sffamily}
-  {}
-  {}
-  {}
-  [\ \textbullet\ ]  
+{\footnotesize\sffamily}
+{}
+{}
+{}
+[\ \textbullet\ ]  
 
 %----------------------------------------------------------------------
 %	MULTIPLE AUTHOR SET
 %----------------------------------------------------------------------  
-  
+
 \newcount\@authcnt
 \newcount\@tmpcnt\@tmpcnt\z@
 
 \def\@affiliation{%
-  \ifnum\@tmpcnt<\@authcnt
-   \global\advance\@tmpcnt1
-    \raggedright \csname @auth\romannumeral\the\@tmpcnt\endcsname\hfill\\%
-   \let\next\@affiliation \vskip1pt
-  \else
-   \let\next\relax
-  \fi
-\next}
-	 
+	\ifnum\@tmpcnt<\@authcnt
+	\global\advance\@tmpcnt1
+	\raggedright \csname @auth\romannumeral\the\@tmpcnt\endcsname\hfill\\%
+	\let\next\@affiliation \vskip1pt
+	\else
+	\let\next\relax
+	\fi
+	\next}
+
 \newcommand{\affiliation}[1]{%
-    \global\advance\@authcnt1
-    \expandafter\gdef\csname @auth\romannumeral\the\@authcnt\endcsname
-    {#1}}
+	\global\advance\@authcnt1
+	\expandafter\gdef\csname @auth\romannumeral\the\@authcnt\endcsname
+	{#1}}
 
 %----------------------------------------------------------------------
 %	LIST CONTROL
@@ -196,38 +196,38 @@ justification=raggedright]{caption}
 % ---------------------------------------------------------------------
 
 \renewcommand{\@maketitle}{%
-\twocolumn[{%
-\thispagestyle{empty}%
-\vskip-36pt%
-{\raggedleft\small\sffamily\bfseries\@JournalInfo\\\@Archive\par}%
-\vskip20pt%
-{\raggedright\sffamily\bfseries\fontsize{20}{25}\selectfont \@PaperTitle\par}%
-\vskip10pt%
-{\raggedright\sffamily\fontsize{12}{16}\selectfont  \@Authors\par}%
-\vskip10pt%
-%\begingroup%
-{\raggedright\sffamily\footnotesize \@affiliation\par}
-%\endgroup%%
-\vskip20pt%
-{%
-\parbox{\textwidth-2\fboxsep-2\fboxrule}{\centering%
-\colorbox{color2!100}{
-\parbox{\textwidth-4\fboxsep-2\fboxrule}{%
-{\color{color1}\hrule}
-\vskip10pt
-\ifx\@Keywords\@empty%
-\sffamily\textbf{\abstractname}\\\@Abstract%
-\else%
-{\sffamily\color{color1}\scshape\textbf{Abstract: }}\@Abstract%\\[4pt]%
-%\textbf{\keywordname}\\\@Keywords%
-%\fi%
-{\color{color1}\hrule}
-}%
-}%
-}%
-}%
-\vskip25pt%
-}]%
+	\twocolumn[{%
+		\thispagestyle{empty}%
+		\vskip-36pt%
+		{\raggedleft\small\sffamily\bfseries\@JournalInfo\\\@Archive\par}%
+		\vskip20pt%
+		{\raggedright\sffamily\bfseries\fontsize{20}{25}\selectfont \scshape\@PaperTitle\par}%
+		\vskip10pt%
+		{\raggedright\sffamily\fontsize{12}{16}\selectfont  \@Authors\par}%
+		\vskip10pt%
+		%\begingroup%
+		{\raggedright\sffamily\footnotesize \@affiliation\par}
+		%\endgroup%%
+		\vskip20pt%
+		{%
+			\parbox{\textwidth-2\fboxsep-2\fboxrule}{\centering%
+				\colorbox{color2!100}{
+					\parbox{\textwidth-4\fboxsep-2\fboxrule}{%
+						{\color{color1}\hrule}
+						\vskip10pt
+						\ifx\@Keywords\@empty%
+						\sffamily\textbf{\abstractname}\\\@Abstract%
+						\else%
+						{\sffamily\color{color1}\scshape\textbf{Abstract: }}\@Abstract%\\[4pt]%
+						%\textbf{\keywordname}\\\@Keywords%
+						%\fi%
+						{\color{color1}\hrule}
+					}%
+				}%
+			}%
+		}%
+		\vskip25pt%
+	}]%
 }
 
 
