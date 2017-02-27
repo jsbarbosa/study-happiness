@@ -133,8 +133,8 @@ cpdef limits(matrix):
 cdef magnitude(pos):
     cdef double r
     r = np.sqrt(np.dot(pos, pos))
-#    if r < 1000:
-#        r = 1000
+    if r < 1000:
+        r = 1000
     return r**3
 
 cdef iterator(np.ndarray[np.float64_t, ndim=1] particle, box tree, double G):
@@ -182,29 +182,33 @@ cdef iterator(np.ndarray[np.float64_t, ndim=1] particle, box tree, double G):
 #                temp[i] = iterator(x[i], tree, G)
 #    return temp
     
-def solver(np.ndarray[np.float64_t, ndim=2] positions, np.ndarray[np.float64_t, ndim=2] speeds, np.ndarray[np.float64_t, ndim=1] masses, int N, double t, double dt , double G):
+def solver(np.ndarray[np.float64_t, ndim=2] positions, np.ndarray[np.float64_t, ndim=2] speeds,
+           np.ndarray[np.float64_t, ndim=1] masses, int N, double t,
+                     double dt , double G, filename='Data/'):
     cdef int n
     cdef np.ndarray[np.float64_t, ndim=2] x
     cdef np.ndarray[np.float64_t, ndim=2] v
+    cdef np.ndarray[np.float64_t, ndim=1] x0, r0
     cdef box tree
     n = int(t/dt)
-    positions_in_time = np.zeros((n, N+2, 3))
+#    positions_in_time = np.zeros((n, N+2, 3))
     x = positions.T.copy()
     v = speeds.T.copy()
     
-    positions_in_time[0] = x
+#    positions_in_time[0] = x
         
     for i in range(n-1):
         print(i)
         x0, r0 = limits(x)
         tree = box(x.T, x0, r0, masses, parent=True, root=True, tree = None)        
-        accelerations = np.array(list(map(lambda pos: iterator(x, tree, G))))
+        accelerations = np.array(list(map(lambda pos: iterator(pos, tree, G), x)))
         v_half = v + 0.5*dt*accelerations
         x += dt*v_half
         x0, r0 = limits(x)
         tree = box(x.T, x0, r0, masses, parent=True, root=True)
-        accelerations = np.array(list(map(lambda pos: iterator(x, tree, G))))#parrallel_acceleration(x, tree, G)
+        accelerations = np.array(list(map(lambda pos: iterator(pos, tree, G), x)))#parrallel_acceleration(x, tree, G)
         v = v_half + 0.5*dt*accelerations
-        positions_in_time[i+1] = x
+#        positions_in_time[i+1] = x
+        np.savetxt("%s%d_instant.dat"%(filename, i+1), x)
         
-    return positions_in_time, n    
+    return n    

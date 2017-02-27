@@ -39,8 +39,13 @@ def random_generator(min_value, max_value, N = 10):
 
 def speeds_generator(distances):
     r = np.sqrt(np.sum(distances**2, axis=0))
-    s = np.sqrt(G*center_mass/r)
     n = len(r)
+    s = np.zeros((3, n))
+    for i in range(n):
+        pos = np.where(r < r[i])
+        M = sum(masses[pos])
+        s[:, i] = np.sqrt(G*M/r[i])
+#    s = np.sqrt(G/r)
     e1 = np.zeros((3, n))
     e1[:-1] = -distances[1,:], distances[0,:]
     e2 = np.array([np.cross(distances[:,i], e1[:,i]) for i in range(n)]).T
@@ -58,7 +63,7 @@ sys.setrecursionlimit(N*N)
 G = 4.302e-3 #pc, solar masses, km/s
 density = (N/(0.14*10**(np.log10(N)-10)))**(1/3)
 masses = abs(normal(loc = 10, size=(N+2)))
-center_mass = 10*max(masses)
+center_mass = 3*max(masses)
 masses[-2:] = center_mass
 min_value, max_value = -density*0.5, density*0.5
 cos45 = np.cos(np.pi/4)
@@ -101,20 +106,16 @@ ax.set_xlabel("$x$")
 ax.set_ylabel("$y$")
 ax.set_zlabel("$z$")
 
-np.savetxt("Data/0_data.dat", matrix)
+np.savetxt("Data/0_instant.dat", matrix)
 
-pos, n = solver(matrix, speeds, masses, N, 2e6, 1e4, G)
-
-for i, data in enumerate(pos):
-    np.savetxt("Data/%d_data.dat"%(i+1), data)
+n = solver(matrix, speeds, masses, N, 2e6, 1e4, G)
 
 frames = 100
 ratio = int(n/frames)
 temp = np.arange(0, n, ratio).astype(int)
-pos = pos[temp]
 
 def update(i):
-    temp = pos[i]
+    temp = np.genfromtxt("Data/%d_instant.dat"%i)
     plot.set_data(temp[:,0], temp[:,1])
     plot.set_3d_properties(temp[:, 2])
 

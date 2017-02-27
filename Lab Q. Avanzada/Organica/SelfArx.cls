@@ -44,6 +44,9 @@
 \RequirePackage{graphicx,xcolor}
 \RequirePackage{booktabs}
 
+%\DefineBibliographyStrings{english}{%
+%	andothers = {\em et\addabbrvspace al\adddot}
+%}
 %----------------------------------------------------------------------
 %	MARGINS	
 %----------------------------------------------------------------------
@@ -233,13 +236,13 @@ justification=raggedright]{caption}
 %----------------------------------------------------------------------  
 
 % Remove brackets from numbering in List of References
-\renewcommand{\@biblabel}[1]{\bfseries\color{color1}\textsuperscript{[#1]}}
+%\renewcommand{\@biblabel}[1]{\bfseries\color{color1}\textsuperscript{[#1]}}
 %\setlength{\bibitemsep}{0cm}
-\let\oldbibliography\thebibliography
-\renewcommand{\thebibliography}[1]{%
-\addcontentsline{toc}{section}{\refname}%
-\oldbibliography{#1}%
-\setlength\itemsep{0pt}}%
+%\let\oldbibliography\thebibliography
+%\renewcommand{\thebibliography}[1]{%
+%\addcontentsline{toc}{section}{\refname}%
+%\oldbibliography{#1}%
+%\setlength\itemsep{0pt}}%
 
 %----------------------------------------------------------------------
 %	SCHEME
