@@ -45,7 +45,7 @@ cdef class box:
         self.mass = sum(self.masses)
         self.center_mass = self.center_mass_calc()
         
-        self.numParticles = len(ppoints[0])
+        self.numParticles = self.points.shape[1]#len(ppoints[0])
         self.children = []
         self.sons_points()
 
@@ -76,13 +76,13 @@ cdef class box:
                         return True, cm, m
                     else:
                         if len(cm) == 1:
-                            return cm[0], m
-                        return cm, m
+                            return cm[0], np.array(m)
+                        return cm, np.array(m)
             else:
                 if not self.root:
                     return False, self.center_mass - point, [self.mass]
                 else:
-                    return self.center_mass - point, [self.mass]
+                    return list(self.center_mass - point), np.array([self.mass])
             
     cdef center_mass_calc(self):
         return [sum(self.masses*self.points[i])/self.mass for i in range(3)]            
@@ -100,8 +100,8 @@ cdef class box:
         data = []
         for i in range(3):
             half = self.halfs[i]            
-            low = (self.points[i] <= half) & (self.points[i] >= self.r0[i])
-            high = (self.points[i] > half) & (self.points[i] <= self.r1[i])
+            low = self.points[i] <= half# & (self.points[i] >= self.r0[i])
+            high = self.points[i] > half# & (self.points[i] <= self.r1[i])
             data.append(low)
             data.append(high)
             
@@ -122,13 +122,37 @@ cdef class box:
                         parent=parent, tree = self.tree)
 
                 self.children.append(son_box)
+                
 cpdef limits(matrix):
     cdef Py_ssize_t i
     cdef list x_min, x_max, rank
     x_min = [min(matrix[:,i])*0.9 if min(matrix[:,i]) > 0 else min(matrix[:,i])*1.1 for i in range(3)]
-    x_max = [1.1*max(matrix[i, :]) - 1.1*x_min[i] for i in range(3)]
-    rank = [x_max[i] - x_min[i] for i in range(3)]
+    x_max = [max(matrix[i, :]) for i in range(3)]
+#    x_max = [1.1*max(matrix[i, :]) - 1.1*x_min[i] for i in range(3)]
+    rank = [1.1*(x_max[i] - x_min[i]) for i in range(3)]
     return np.array(x_min), np.array(rank)
+
+#cpdef limits(matrix):
+#    x_maxs = np.zeros(3)
+#    x_mins = np.zeros(3)
+#    for i in range(3):
+#        x_min = min(matrix[:, i])
+#        x_maxs[i] = max(matrix[:, i])
+#        
+#        if x_min > 0:
+#            x_min *= 0.9
+#        else:
+#            x_min *= 1.1
+#        if x_max > 0:
+#            x_max *= 1.1
+#        else:
+#            x_max *= 0.9
+#        x_mins[i] = x_min
+#        x_maxs[i] = x_max
+#    
+#    rank = (x_maxs - x_mins)*1.5
+#    return x_mins, rank
+
 
 cdef magnitude(pos):
     cdef double r
@@ -141,8 +165,9 @@ cdef iterator(np.ndarray[np.float64_t, ndim=1] particle, box tree, double G):
     cdef Py_ssize_t i
     cdef tuple ans
 #    cdef np.ndarray[np.float64_t, ndim=2] distance
-    cdef list distance, masses
-#    cdef np.ndarray[np.float64_t, ndim=1] masses
+#    cdef np.ndarray[np.float64_t, ndim=2] distance
+    cdef list distance
+    cdef np.ndarray[np.float64_t, ndim=1] masses
     cdef np.ndarray[np.float64_t, ndim=2] acceleration_array
     cdef np.ndarray[np.float64_t, ndim=1] acceleration_3d
     cdef int n
@@ -192,15 +217,15 @@ def solver(np.ndarray[np.float64_t, ndim=2] positions, np.ndarray[np.float64_t, 
     cdef box tree
     n = int(t/dt)
 #    positions_in_time = np.zeros((n, N+2, 3))
-    x = positions.T.copy()
-    v = speeds.T.copy()
+    x = positions.T#positions.T.copy()
+    v = speeds.T#speeds.T.copy()
     
 #    positions_in_time[0] = x
         
     for i in range(n-1):
         print(i)
         x0, r0 = limits(x)
-        tree = box(x.T, x0, r0, masses, parent=True, root=True, tree = None)        
+        tree = box(x.T, x0, r0, masses, parent=True, root=True)        
         accelerations = np.array(list(map(lambda pos: iterator(pos, tree, G), x)))
         v_half = v + 0.5*dt*accelerations
         x += dt*v_half

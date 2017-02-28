@@ -44,14 +44,20 @@ def speeds_generator(distances):
     for i in range(n):
         pos = np.where(r < r[i])
         M = sum(masses[pos])
-        s[:, i] = np.sqrt(G*M/r[i])
+        if M != 0:
+            cm = np.sum(masses[pos]*distances[:, pos]/M, axis=-1)#/M
+            temp = r[i] - cm
+            temp = np.sqrt(np.sum(temp**2, axis=0))
+            s[:, i] = np.sqrt(G*M/temp)
+        else:
+            s[:, i] = 0
 #    s = np.sqrt(G/r)
     e1 = np.zeros((3, n))
     e1[:-1] = -distances[1,:], distances[0,:]
     e2 = np.array([np.cross(distances[:,i], e1[:,i]) for i in range(n)]).T
     n1 = e1/np.sqrt(np.sum(e1**2, axis=0))
     n2 = e2/np.sqrt(np.sum(e2**2, axis=0))
-    omega = 2*np.pi*random()
+    omega = np.pi#2*np.pi*random()
     vel = np.cos(omega)*n1 + np.sin(omega)*n2
     vel *= s
     return vel
@@ -63,7 +69,7 @@ sys.setrecursionlimit(N*N)
 G = 4.302e-3 #pc, solar masses, km/s
 density = (N/(0.14*10**(np.log10(N)-10)))**(1/3)
 masses = abs(normal(loc = 10, size=(N+2)))
-center_mass = 3*max(masses)
+center_mass = max(masses)#0.001*sum(masses)
 masses[-2:] = center_mass
 min_value, max_value = -density*0.5, density*0.5
 cos45 = np.cos(np.pi/4)
