@@ -249,6 +249,7 @@ justification=raggedright]{caption}
 %---------------------------------------------------------------------- 
 \RequirePackage{newfloat}
 \DeclareFloatingEnvironment[fileext=los, listname=Lista de Esquemas, name=Esquema, placement=tbhp]{scheme}
+\RequirePackage[version=4]{mhchem}
 
 %----------------------------------------------------------------------
 %	LABORATORIO AVANZADO
