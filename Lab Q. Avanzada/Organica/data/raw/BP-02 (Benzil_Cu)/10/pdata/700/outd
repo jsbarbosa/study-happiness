@@ -1,0 +1,16 @@
+##TITLE= Parameter file, TOPSPIN		Version 3.2
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 1	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= root
+$$ 2017-02-15 07:45:09.308 -0500  root@QUIEQP303001
+$$ C:/Users/root/Desktop/RMN/DOCENCIA/data/Docencia/nmr/BP-02/10/pdata/700/outd
+$$ process C:\Bruker\TopSpin3.2\prog\mod\go.exe
+##$CURPLOT= <>
+##$CURPRIN= <>
+##$DFORMAT= <>
+##$LAYOUT= <>
+##$LFORMAT= <>
+##$PFORMAT= <>
+##END=

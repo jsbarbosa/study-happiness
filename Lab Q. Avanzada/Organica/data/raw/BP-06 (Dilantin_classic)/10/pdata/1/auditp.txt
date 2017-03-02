@@ -1,0 +1,36 @@
+##TITLE= Audit trail, TOPSPIN		Version 3.2
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= root
+$$ C:/Users/root/Desktop/RMN/DOCENCIA/data/Docencia/nmr/BP-06/10/pdata/1/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2017-02-27 08:27:33.717 -0500>,<root>,<QUIEQP303001>,<go>,<TOPSPIN 3.2>,
+      <created by zg
+	started at 2017-02-27 08:25:59.929 -0500,
+	POWCHK enabled, PULCHK disabled,
+       configuration hash MD5:
+       8E EA B7 81 0C 1D 5D 6D 3E 54 53 FF 91 7F 7B 9B
+       data hash MD5: 64K
+       5A EC 6C E9 10 0C 33 B2 FA AD 8C 7C C5 76 EE D2>)
+(   2,<2017-02-27 08:27:34.981 -0500>,<root>,<QUIEQP303001>,<audit>,<TOPSPIN 3.2>,
+      <user comment:
+       ICON-NMR User ID: Docencia
+       data hash MD5: 64K
+       5A EC 6C E9 10 0C 33 B2 FA AD 8C 7C C5 76 EE D2>)
+(   3,<2017-02-27 08:27:35.511 -0500>,<root>,<QUIEQP303001>,<proc1d>,<TOPSPIN 3.2>,
+      <Start of raw data processing
+       ef LB = 0.3 FT_mod = 6 PKNL = 1 SI = 64K 
+       data hash MD5: 64K
+       DD 06 37 89 D8 77 30 3D 42 2E 44 1B DA 96 DF D8>)
+(   4,<2017-02-27 08:27:35.683 -0500>,<root>,<QUIEQP303001>,<proc1d>,<TOPSPIN 3.2>,
+      <apk 
+       data hash MD5: 64K
+       32 C5 6F 3C EC 7C 9D B8 A8 97 73 5C FF 09 01 62>)
+(   5,<2017-02-27 08:27:37.227 -0500>,<root>,<QUIEQP303001>,<proc1d>,<TOPSPIN 3.2>,
+      <abs ABSG = 5 
+       data hash MD5: 64K
+       8B BF 72 1B 35 27 4F 9E 80 AA FC E5 E1 F4 A7 0D>)
+##END=
+
+$$ hash MD5
+$$ 14 95 29 D8 11 E8 9D A5 FC 54 2B 7A 06 F6 86 30
