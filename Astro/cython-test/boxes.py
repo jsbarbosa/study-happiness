@@ -62,7 +62,7 @@ def speeds_generator(distances):
     vel *= s
     return vel
 
-N = 1000
+N = 4000
 N_half = int(N/2)
 sys.setrecursionlimit(N*N)
 
@@ -114,7 +114,7 @@ ax.set_zlabel("$z$")
 
 np.savetxt("Data/0_instant.dat", matrix)
 
-n = solver(matrix, speeds, masses, N, 2e6, 1e4, G)
+n = solver(matrix, speeds, masses, N, 2e7, 1e4, G)
 
 frames = 100
 ratio = int(n/frames)

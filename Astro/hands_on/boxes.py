@@ -8,7 +8,7 @@ import sys
 
 class box():
     def __init__(self, points, r0, rs, masses, root = False, parent = False, tree = None):
-        global ax
+        global ax, tree__
         self.points = points
         self.masses = masses
         self.parent = parent
@@ -30,7 +30,7 @@ class box():
         else:
             self.tree = tree
         
-        self.numParticles = len(points[0])
+        self.numParticles = self.points.shape[1]
         self.children = []
         self.sons_points()
         self.tree.append(self)
@@ -101,8 +101,8 @@ class box():
         data = []
         for i in range(3):
             half = self.halfs[i]            
-            low = (self.points[i] <= half) & (self.points[i] >= self.r0[i])
-            high = (self.points[i] > half) & (self.points[i] <= self.r1[i])
+            low = self.points[i] <= half# & (self.points[i] >= self.r0[i])
+            high = self.points[i] > half# & (self.points[i] <= self.r1[i])
             data.append(low)
             data.append(high)
             
@@ -120,7 +120,7 @@ class box():
                 else:
                     parent = True
                 self.children.append(box(points, [self.tx[j], self.ty[k],
-                         self.tz[l]], self.steps, self.masses[inter], parent=parent, tree = self.tree))
+                         self.tz[l]], self.steps, self.masses[inter], parent = parent, tree=self.tree))
 
 def galaxy(N, min_v, max_v, arms = 5):
     a = 0.4
@@ -175,10 +175,29 @@ def minimum(value):
         return value*1.1
 
 def limits(matrix):
-    x_min = [min(matrix[:,i])*0.9 if min(matrix[:,i]) > 0 else min(matrix[:,i])*1.1 for i in range(3)]
-    x_max = [1.1*max(matrix[i, :]) - 1.1*x_min[i] for i in range(3)]
-    rank = [x_max[i] - x_min[i] for i in range(3)]
-    return np.array(x_min), np.array(rank)
+    x_maxs = np.zeros(3)
+    x_mins = np.zeros(3)
+    for i in range(3):
+        x_min = min(matrix[:, i])
+        x_maxs[i] = max(matrix[:, i])
+        
+        if x_min > 0:
+            x_min *= 0.9
+        else:
+            x_min *= 1.1
+#        if x_max > 0:
+#            x_max *= 1.1
+#        else:
+#            x_max *= 0.9
+        x_mins[i] = x_min
+#        x_maxs[i] = x_max
+    
+    rank = (x_maxs - x_mins)*1.5
+    return x_mins, rank
+#    x_min = [min(matrix[:,i])*0.9 if min(matrix[:,i]) > 0 else min(matrix[:,i])*1.1 for i in range(3)]
+#    x_max = [1.1*max(matrix[i, :]) - 1.1*x_min[i] for i in range(3)]
+#    rank = [x_max[i] - x_min[i] for i in range(3)]
+#    return np.array(x_min), np.array(rank)
     
 def leapfrog(x, v, dt):
     x0, r0 = limits(x)
@@ -199,7 +218,9 @@ def solver(positions, speeds, t, dt):
     v = speeds.T.copy()
     
     positions_in_time[0] = x
-        
+
+    trees = []
+    x0, r0 = [[-2e10, -2e10, -2e10], [10e10, 10e10, 10e10]]
     for i in range(n-1):
         x0, r0 = limits(x)
         tree = box(x.T, x0, r0, masses, parent=True, root=True)        
@@ -211,8 +232,9 @@ def solver(positions, speeds, t, dt):
         accelerations = np.array(list(map(lambda pos: iterator(pos, tree), x)))
         v = v_half + 0.5*dt*accelerations
         positions_in_time[i+1] = x
+        trees.append(tree)
         
-    return positions_in_time, n
+    return positions_in_time, n, trees
 
 def random_generator(min_value, max_value, N = 10):
     return (max_value-min_value)*random(N) + min_value
@@ -231,14 +253,14 @@ def speeds_generator(distances):
     vel *= s
     return vel
 
-N = 100
+N = 20
 N_half = int(N/2)
 sys.setrecursionlimit(N*N)
 
 G = 4.302e-3 #pc, solar masses, km/s
 density = (N/(0.14*10**(np.log10(N)-10)))**(1/3)
 masses = abs(normal(loc = 10, size=(N+2)))
-center_mass = 100*max(masses)
+center_mass = max(masses)
 masses[-2:] = center_mass
 min_value, max_value = -density*0.5, density*0.5
 cos45 = np.cos(np.pi/4)
@@ -275,26 +297,35 @@ ax = fig.gca(projection='3d')
 ax.set_aspect("equal")
 #ax.plot([center1[0], center2[0]], [center1[1], center2[1]], [center1[2], center2[2]], "o", ms=20)
 #ax.set_axis_off()
-plot = ax.plot(matrix[0], matrix[1], matrix[2], "o", ms=0.4, c="black")[0]
-#plot2 = ax.plot(x2, y2, z2, "o", ms=0.4, c="r")[0]
+#r0, rs = limits(matrix)
+#temp = box(matrix, r0, rs, masses, root = True, parent = True)
+#
+#for item in temp.tree:
+#    item.plot(child_only=False)
+
 ax.set_xlabel("$x$")
 ax.set_ylabel("$y$")
 ax.set_zlabel("$z$")
-
-np.savetxt("Data/0_data.dat", matrix)
-pos, n = solver(matrix, speeds, 2e6, 1e4)
-for i, data in enumerate(pos):
-    np.savetxt("Data/%d_data.dat"%(i+1), data)
+#np.savetxt("Data/0_data.dat", matrix)
+pos, n, trees = solver(matrix, speeds, 2e6, 1e4)
 
 frames = 100
 ratio = int(n/frames)
 temp = np.arange(0, n, ratio).astype(int)
 pos = pos[temp]
 
+plot = ax.plot([], [], [], "o", ms=0.4, c="black")[0]
+
 def update(i):
     temp = pos[i]
     plot.set_data(temp[:,0], temp[:,1])
-    plot.set_3d_properties(temp[:, 2])
+    plot.set_3d_properties(temp[:, 2])    
+#    for child in tree.tree:
+#        child.plot()#child_only=False)
+#    ax.set_xlim(min_value, max_value)
+#    ax.set_ylim(min_value, max_value)
+#    ax.set_zlim(min_value, max_value)
+
 
 min_value *= 5
 max_value *= 5
@@ -303,5 +334,5 @@ ax.set_ylim(min_value, max_value)
 ax.set_zlim(min_value, max_value)
 
 ani = FuncAnimation(fig, update, frames=frames, interval=frames)
-ani.save("temp.gif", writer='imagemagick')
-#plt.show()
+#ani.save("temp.gif", writer='imagemagick')
+plt.show()
