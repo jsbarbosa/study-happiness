@@ -13,39 +13,36 @@ from libc.stdlib cimport abort, malloc, free
 cimport openmp
 
 cdef class box:
-    cdef public np.ndarray points, masses, r0, r1, steps
-    cdef int tolerance, numParticles
+    cdef public np.ndarray points, r0, r1, steps, center_mass, halfs
+    cdef int tolerance, numParticles, mass
     cdef public bint parent, root
     cdef tuple tx, ty, tz
-    cdef double mass, length
-    cdef list halfs, center_mass, children
+    cdef double length
+    cdef list children
     cdef box tree
     def __init__(self, np.ndarray[np.float64_t, ndim=2] ppoints, 
-                 np.ndarray[np.float64_t, ndim=1] pr0, np.ndarray[np.float64_t, ndim=1] prs,
-                           np.ndarray[np.float64_t, ndim=1] pmasses, root = False,
+                 np.ndarray[np.float64_t, ndim=1] pr0, np.ndarray[np.float64_t, ndim=1] prs, root = False,
                                      parent = False, tree = None):
         cdef Py_ssize_t i                       
         
         self.points = ppoints #array
-        self.masses = pmasses #array
         self.parent = parent #boolean
         self.root = root #boolean
         self.tolerance = 1
         self.r0 = pr0 #array
         self.tree = tree
 #        self.r1 = np.sum(pr0, prs, axis=0)
-        self.r1 = np.array([pr0[i] + prs[i] for i in range(3)])
+        self.r1 = pr0+prs#np.array([pr0[i] + prs[i] for i in range(3)])
         self.steps = 0.5*prs
-        self.halfs = [pr0[i] + self.steps[i] for i in range(3)]
+        self.halfs = pr0 + self.steps#[pr0[i] + self.steps[i] for i in range(3)]
         self.length = np.sum(prs**2)**0.5
         self.tx = self.r0[0], self.halfs[0]
         self.ty = self.r0[1], self.halfs[1]
         self.tz = self.r0[2], self.halfs[2]
         
-        self.mass = sum(self.masses)
-        self.center_mass = self.center_mass_calc()
-        
-        self.numParticles = self.points.shape[1]#len(ppoints[0])
+        self.mass = self.points.shape[1]
+        self.center_mass = np.sum(self.points, axis=-1)/self.mass
+        self.numParticles = self.mass
         self.children = []
         self.sons_points()
 
@@ -57,7 +54,7 @@ cdef class box:
         cdef Py_ssize_t i
         l = self.length
         if self.center_mass[0] != point[0]:
-            d = sum([(self.center_mass[i] - point[i])**2 for i in range(3)])**0.5
+            d = np.sqrt(sum((self.center_mass - point)**2))
             theta = l/d
             if theta > self.tolerance:
                 cm, m = [], []
@@ -69,24 +66,25 @@ cdef class box:
                             cm += ans[1]
                         else:
                             cm.append(ans[1])
-                        m += ans[2]
+                        if type(ans[2]) is list:
+                            m += ans[2]
+                        else:
+                            m.append(ans[2])
                         i += 1
                 if i > 0:
                     if not self.root:
                         return True, cm, m
                     else:
                         if len(cm) == 1:
-                            return cm[0], np.array(m)
-                        return cm, np.array(m)
+                            print(m)
+                            return cm[0], m
+                        return cm, m
             else:
                 if not self.root:
-                    return False, self.center_mass - point, [self.mass]
+                    return False, self.center_mass - point, self.mass
                 else:
-                    return list(self.center_mass - point), np.array([self.mass])
-            
-    cdef center_mass_calc(self):
-        return [sum(self.masses*self.points[i])/self.mass for i in range(3)]            
-        
+                    return list(self.center_mass - point), self.mass
+
     cdef sons_points(self):
         cdef box son_box
         cdef double half
@@ -118,8 +116,7 @@ cdef class box:
                 else:
                     parent = True
                 son_box = box(points, np.array([self.tx[j], self.ty[k],
-                         self.tz[l]]), self.steps, self.masses[inter], 
-                        parent=parent, tree = self.tree)
+                         self.tz[l]]), self.steps, parent=parent, tree = self.tree)
 
                 self.children.append(son_box)
                 
@@ -157,17 +154,15 @@ cpdef limits(matrix):
 cdef magnitude(pos):
     cdef double r
     r = np.sqrt(np.dot(pos, pos))
-    if r < 1000:
-        r = 1000
+    print(r)
+    if r < 0.001:
+        r = 0.001
     return r**3
 
 cdef iterator(np.ndarray[np.float64_t, ndim=1] particle, box tree, double G):
     cdef Py_ssize_t i
     cdef tuple ans
-#    cdef np.ndarray[np.float64_t, ndim=2] distance
-#    cdef np.ndarray[np.float64_t, ndim=2] distance
     cdef list distance
-    cdef np.ndarray[np.float64_t, ndim=1] masses
     cdef np.ndarray[np.float64_t, ndim=2] acceleration_array
     cdef np.ndarray[np.float64_t, ndim=1] acceleration_3d
     cdef int n
@@ -185,31 +180,13 @@ cdef iterator(np.ndarray[np.float64_t, ndim=1] particle, box tree, double G):
             acceleration_array = np.zeros((n, 3))
             for i in range(n):
                 acceleration_array[i] = masses[i]*distance[i]/magnitude(distance[i]) 
-#            mag_array = np.array(list(map(magnitude, distance)))
-#            ratio = masses/mag_array
-#            acceleration_array = np.array([ratio[i]*np.array(distance[i]) for i in range_n])
             acceleration_3d = G*np.sum(acceleration_array, axis = 0)
         return acceleration_3d
     else:
         return [0,0,0]
     
-#cdef parrallel_acceleration(np.ndarray[np.float64_t, ndim=2] x, box tree, double G):
-#    cdef int n, numthreads
-#    cdef Py_ssize_t i
-#    cdef np.ndarray[np.float64_t, ndim=2] temp
-#    cdef double position[3]
-#    n = x.shape[0]
-#    temp = np.zeros((n, 3))
-#    with nogil, parallel(num_threads=4):
-#        numthreads = openmp.omp_get_num_threads()
-#        for i in prange(n, schedule="dynamic"):
-#            with gil:            
-#                temp[i] = iterator(x[i], tree, G)
-#    return temp
-    
 def solver(np.ndarray[np.float64_t, ndim=2] positions, np.ndarray[np.float64_t, ndim=2] speeds,
-           np.ndarray[np.float64_t, ndim=1] masses, int N, double t,
-                     double dt , double G, filename='Data/'):
+           int N, double t, double dt , double G, filename='Data/'):
     cdef int n
     cdef np.ndarray[np.float64_t, ndim=2] x
     cdef np.ndarray[np.float64_t, ndim=2] v
@@ -225,12 +202,12 @@ def solver(np.ndarray[np.float64_t, ndim=2] positions, np.ndarray[np.float64_t, 
     for i in range(n-1):
         print(i)
         x0, r0 = limits(x)
-        tree = box(x.T, x0, r0, masses, parent=True, root=True)        
+        tree = box(x.T, x0, r0, parent=True, root=True)        
         accelerations = np.array(list(map(lambda pos: iterator(pos, tree, G), x)))
         v_half = v + 0.5*dt*accelerations
         x += dt*v_half
         x0, r0 = limits(x)
-        tree = box(x.T, x0, r0, masses, parent=True, root=True)
+        tree = box(x.T, x0, r0, parent=True, root=True)
         accelerations = np.array(list(map(lambda pos: iterator(pos, tree, G), x)))#parrallel_acceleration(x, tree, G)
         v = v_half + 0.5*dt*accelerations
 #        positions_in_time[i+1] = x

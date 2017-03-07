@@ -33,9 +33,7 @@ def update(i):
 #    text.set_text("%d"%i)
 #    ax.view_init(0, i*360/frames)
 
-min_value, max_value = min(x), max(x)
-min_value *= 2.0
-max_value *= 2.0
+min_value, max_value = -200, 200
 ax.set_xlim(min_value, max_value)
 ax.set_ylim(min_value, max_value)
 ax.set_zlim(min_value, max_value)
