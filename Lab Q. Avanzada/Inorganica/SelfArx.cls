@@ -263,5 +263,5 @@ justification=raggedright]{caption}
 \RequirePackage{hyperref} % Required for hyperlinks
 \hypersetup{hidelinks,colorlinks,breaklinks=true,urlcolor=color2,citecolor=color1,linkcolor=color1,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
 
-\Authors{Andr\'es Perez$^\dagger$, Juan Barbosa $^\ddagger$} % Authors
-\affiliation{ \textit{Departamento de Qu\'imica}. $^\dagger$\textit{Departamento de Ing. Qu\'imica}. $^\ddagger$\textit{Departamento de F\'isica}. Universidad de los Andes, Bogot\'a, Colombia.} % Author affiliation
+\Authors{Catherine Cabrera, Juan Barbosa} % Authors
+\affiliation{\textit{Departamento de Qu\'imica}. Universidad de los Andes, Bogot\'a, Colombia.} % Author affiliation
