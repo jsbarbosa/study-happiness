@@ -12,33 +12,39 @@ double *cal_probability(double *function);
 void solver(double *function, double *derivative, double epsilon, int l);
 double seaker(double *function, double *derivative);
 double *cal_charge(double *probability);
-void cal_potential(double V_0, double *charge);
+void cal_potential(double *charge);
 
 int main(int argc, char **argv)
 {
-    int i;
+    int i, j;
     double der, epsilon;
     double *R = malloc(N*sizeof(double));
     double *R_prime = malloc(N*sizeof(double));
     double *P, *charge;
+    char name[100];
     V = malloc(N*sizeof(double));
 	U = linspace(0.001, 30, N);
     initial_potential();
 
     R[0] = 1;
     R_prime[0] = -0.99;
-    epsilon = seaker(R, R_prime);
-    P = cal_probability(R);
-    charge = cal_charge(P);
-    cal_potential(0, charge);
     
-    FILE *output = fopen("data.dat", "w");
-
-    for(i=0; i<N; i++)
+    for(i=0; i<10; i++)
     {
-        fprintf(output, "%f %f %f %f %f\n", U[i], R[i], P[i], charge[i], V[i]);
+        sprintf(name, "%d_data.dat", i+1);
+        FILE *output = fopen(name, "w");
+        epsilon = seaker(R, R_prime);
+        P = cal_probability(R);
+        charge = cal_charge(P);
+        cal_potential(charge);
+        printf("%d & %f \\\\ \n", i+1, epsilon);
+        for(j=0; j<N; j++)
+        {
+            fprintf(output, "%f %f %f %f %f\n", U[j], R[j], P[j], charge[j], V[j]);
+        }
+        fclose(output);
     }
-    fclose(output);
+    
 	return 0;
 }
 
@@ -60,23 +66,29 @@ double *cal_charge(double *probability)
     double *charge = malloc(N*sizeof(double));
     for(i=0; i<N; i++)
     {
-        charge[i] = Z-(Z-1)*integrate(probability, dx, i+1);
+        charge[i] = -(Z-1)*integrate(probability, dx, i+1);
     }
     return charge;
 }
 
-void cal_potential(double V_0, double *charge)
+void cal_potential(double *charge)
 {
     int i;
     double *delta = malloc(N*sizeof(double));
+    double V0;
     for(i=0; i<N; i++)
     {
         delta[i] = -(2/Z)*(charge[i]/(U[i]*U[i]));
     }
-    V[0] = delta[0] + V_0;
-    for(i=1; i<N; i++)
+    for(i=0; i<N; i++)
     {
-        V[i] = integrate(delta, dx, i+1);
+        V[i] = -(integrate(delta, dx, i+1) + Z/U[i]);
+    }
+    V0 = 0.0333333 + V[N-1];
+    //V0 = 1/30 + V[N-1];
+    for(i=0; i<N; i++)
+    {
+        V[i] += -V0;
     }
     free(delta);
 }
@@ -111,18 +123,19 @@ double integrate(double *function, double dx, int N)
     
 double seaker(double *function, double *derivative)
 {
-    double energy, last, de, current;
+    double energy, last, de, current, low_bound;
     
     energy = -0.5;
-    de = 0.01;
+    de = 0.0001;
     last = 0;
     current = 1;
-    while((fabs(current) >= 1E-3) && (de > 1E-9))
+    low_bound = 0;
+    while((fabs(current) >= 1E-3) && (de > 1E-8) && (energy < -0.3))
     {
         energy += de;
         solver(function, derivative, energy, l);
         current = function[N-1];
-        if (current*last < 0)
+        if(current*last < 0)
         {
             energy += -de;
             de *= 0.1;

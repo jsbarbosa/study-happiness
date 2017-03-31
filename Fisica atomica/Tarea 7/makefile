@@ -1,8 +1,12 @@
-all : plotter.py data.dat
+all : plotter.py 1_data.dat
 	python plotter.py
 
-data.dat : a.out
+1_data.dat : a.out
 	./a.out
+
 a.out : atom.c
 	gcc -lm atom.c
+
+clean :
+	rm *.dat a.out
 	
