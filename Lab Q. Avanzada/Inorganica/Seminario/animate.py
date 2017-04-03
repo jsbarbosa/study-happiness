@@ -4,41 +4,34 @@ import xml.etree.ElementTree as ET
 from mpl_toolkits.mplot3d import axes3d
 from matplotlib.animation import FuncAnimation
 
+def getInfo(filename):
+    tree = ET.parse(filename)
+    root = tree.getroot()[1][0][0]
+    atoms_ = root[0]
+    bonds_ = root[1]
+    N_atoms = 0
+    for item in atoms_:
+        N_atoms += 1
+    N_bonds = 0
+    for item in bonds_:
+        N_bonds += 1
+    atoms = {}
+    bonds = {}
+    for i in range(N_atoms):
+        attrib = atoms_[i].attrib
+        iden = attrib["id"]
+        atoms[iden] = attrib
+    for i in range(N_bonds):
+        attrib = bonds_[i].attrib
+        iden = attrib["id"]
+        bonds[iden] = attrib
+    return (N_atoms, atoms), (N_bonds, bonds)
 
-def sphere(x, y, z, radious, N=50):
-    r = radious
-    theta = np.linspace(0, np.pi, N)
-    phi = np.linspace(0, 2*np.pi, N)
-    theta, phi = np.meshgrid(theta, phi)
-    x = r*np.sin(theta)*np.cos(phi) + x
-    y = r*np.sin(theta)*np.sin(phi) + y
-    z = r*np.cos(theta) + z
-    return x, y, z
-
-tree = ET.parse('BINAPcomplex_(1).mrv')
-root = tree.getroot()[1][0][0]
-atoms_ = root[0]
-bonds_ = root[1]
-N_atoms = 0
-for item in atoms_:
-    N_atoms += 1
-N_bonds = 0
-for item in bonds_:
-    N_bonds += 1
-
-atoms = {}
-bonds = {}
 colors = {"C": "black", "P": "sandybrown", "Cl": "green", "O": "red", "Ru": "blue", "R": "black", "H": "grey"}
 sizes = {"C": 67, "P": 98, "Cl": 79, "O": 48, "Ru": 178, "R": 100, "H": 53}
-for i in range(N_atoms):
-    attrib = atoms_[i].attrib
-    iden = attrib["id"]
-    atoms[iden] = attrib
-for i in range(N_bonds):
-    attrib = bonds_[i].attrib
-    iden = attrib["id"]
-    bonds[iden] = attrib
 
+
+(N_atoms, atoms), (N_bonds, bonds) = getInfo("BINAPcomplex3d.mrv")
 bond_values = []
 for (i, bond) in enumerate(bonds):
     bond = bonds[bond]
@@ -64,7 +57,7 @@ for atom in atoms:
     atom = atoms[atom]
     element = atom["elementType"]
     color = colors[element]
-    size = sizes[element]/5
+    size = sizes[element]/10
     x, y, z = float(atom['x3']), float(atom['y3']), float(atom['z3'])
     x, y, z = [x], [y], [z]
     ax.plot(x, y, z, "o", ms = size, color = color)
@@ -76,4 +69,4 @@ def update(i):
 frames = 60
 ani = FuncAnimation(fig, update, frames=frames)
 ani.save("noyori.gif", writer="imagemagick")
-plt.show()
+#plt.show()
