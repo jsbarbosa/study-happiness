@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-int N = 10000, Z = 2, l=0;
+int N = 1000, Z = 2, l=0;
 double dx, *V, *U;
 
 double *linspace(double min, double max, int N);
@@ -23,13 +23,15 @@ int main(int argc, char **argv)
     double *P, *charge;
     char name[100];
     V = malloc(N*sizeof(double));
-	U = linspace(0.001, 30, N);
+	U = linspace(0.01, 30, N);
     initial_potential();
 
     R[0] = 1;
     R_prime[0] = -0.99;
     
-    for(i=0; i<10; i++)
+    FILE *energies = fopen("energies.dat", "w");
+    
+    for(i=0; i<50; i++)
     {
         sprintf(name, "%d_data.dat", i+1);
         FILE *output = fopen(name, "w");
@@ -43,8 +45,16 @@ int main(int argc, char **argv)
             fprintf(output, "%f %f %f %f %f\n", U[j], R[j], P[j], charge[j], V[j]);
         }
         fclose(output);
+        free(charge);
+        free(P);
+        fprintf(energies, "%f\n", epsilon);
     }
     
+    free(V);
+    free(U);
+    free(R);
+    free(R_prime);
+    fclose(energies);
 	return 0;
 }
 
@@ -84,8 +94,7 @@ void cal_potential(double *charge)
     {
         V[i] = -(integrate(delta, dx, i+1) + Z/U[i]);
     }
-    V0 = 0.0333333 + V[N-1];
-    //V0 = 1/30 + V[N-1];
+    V0 = 1.0/30 + V[N-1];
     for(i=0; i<N; i++)
     {
         V[i] += -V0;
@@ -126,19 +135,24 @@ double seaker(double *function, double *derivative)
     double energy, last, de, current, low_bound;
     
     energy = -0.5;
-    de = 0.0001;
+    de = 0.01;
     last = 0;
     current = 1;
     low_bound = 0;
-    while((fabs(current) >= 1E-3) && (de > 1E-8) && (energy < -0.3))
+    while((fabs(current) >= 1E-3) && (de > 1E-8) && (energy < 0))
     {
         energy += de;
         solver(function, derivative, energy, l);
         current = function[N-1];
         if(current*last < 0)
         {
+            low_bound = energy;
             energy += -de;
             de *= 0.1;
+        }
+        if(current > low_bound);
+        {
+            de *= 1.1;
         }
         last = current;
     }
