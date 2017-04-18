@@ -28,9 +28,9 @@ int main(int argc, char **argv)
 
     R[0] = 1;
     R_prime[0] = -0.99;
-
+    
     FILE *energies = fopen("energies.dat", "w");
-
+    
     for(i=0; i<50; i++)
     {
         sprintf(name, "%d_data.dat", i+1);
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
         free(P);
         fprintf(energies, "%f\n", epsilon);
     }
-
+    
     free(V);
     free(U);
     free(R);
@@ -101,7 +101,7 @@ void cal_potential(double *charge)
     }
     free(delta);
 }
-
+        
 double *cal_probability(double *function)
 {
     int i;
@@ -110,7 +110,7 @@ double *cal_probability(double *function)
     {
         P[i] = pow(U[i]*function[i], 2);
     }
-
+    
     norm = integrate(P, dx, N);
     for(i=0; i<N; i++)
     {
@@ -129,11 +129,11 @@ double integrate(double *function, double dx, int N)
     }
     return integral*dx;
 }
-
+    
 double seaker(double *function, double *derivative)
 {
     double energy, last, de, current, low_bound;
-
+    
     energy = -0.5;
     de = 0.01;
     last = 0;
@@ -164,7 +164,7 @@ double *linspace(double min, double max, int N)
     int i;
     dx = (max-min)/(N-1);
     double *x = malloc(N*sizeof(double));
-
+    
     x[0] = min;
     for(i=0; i<(N-1); i++)
     {
@@ -177,7 +177,7 @@ void solver(double *function, double *derivative, double epsilon, int l)
 {
     int L = l*(l+1), i = 0;
     double der;
-
+    
     for(i=0; i<(N-1); i++)
     {
         der = -2*derivative[i]/U[i] - function[i]*(epsilon - V[i] - L/(U[i]*U[i]));
