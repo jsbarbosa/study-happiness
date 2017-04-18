@@ -68,5 +68,5 @@ def update(i):
     
 frames = 60
 ani = FuncAnimation(fig, update, frames=frames)
-ani.save("noyori.gif", writer="imagemagick")
+ani.save("noyori.gif", writer="imagemagick", dpi=70)
 #plt.show()
