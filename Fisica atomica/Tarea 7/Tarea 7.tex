@@ -118,14 +118,33 @@ La implementaci\'on se realiza en C, y una \'ultima parte en Python para grafica
 	\label{fig:prop}
 \end{figure}
 
-La \autoref{fig:prop} muestra el comportamiento del potencial en para las distintas iteraciones. Se observa que el potencial inicial es considerablemente parecido al real. Las energ\'ias se muestran en la parte inferior, de donde se observa que se estabilizan para $\epsilon=-0.114$:
+La \autoref{fig:prop} muestra el comportamiento del potencial en funci\'on de las iteraciones. Se observa que el potencial inicial es considerablemente parecido al real. Las energ\'ias oscilan de la siguiente forma:
+\begin{table}[h]
+	\centering
+	\begin{tabular}{cc}
+		\hline
+		\textbf{Iteraci\'on} & \textbf{Energ\'ia} ($\epsilon$) \\
+		\hline
+		1 & -0.465079 \\
+		2 & -0.457451 \\
+		3 & -0.461811 \\
+		4 & -0.456670 \\
+		5 & -0.458107 \\
+		6 & -0.465260 \\
+		7 & -0.460265 \\
+		8 & -0.478008 \\
+		9 & -0.455135 \\
+		10 & -0.458269 \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \pagebreak
 La funci\'on radial resultante para cada electr\'on se muestra en la siguiente figura. Adem\'as se grafican la probabilidad radial, la densidad de carga y el comportamiento del potencial a distancias cortas y largas.
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\linewidth]{complete.pdf}
-	\caption{Distintas propiedades de la funci\'on encontrada luego de 50 iteraciones.}
+	\caption{Distintas propiedades de la funci\'on encontrada luego de 10 iteraciones.}
 \end{figure}
 \end{document}
               

@@ -3,28 +3,20 @@ import matplotlib.pyplot as plt
 
 Z = 2
 
-energies = np.genfromtxt("energies.dat")
-N = len(energies)+1
-n = np.arange(1, N)
-
-fig, (ax, ax1) = plt.subplots(2)
-for i in range(1, 20, 4):
+fig, ax = plt.subplots()
+for i in range(1, 11):
     data = np.genfromtxt("%d_data.dat"%i).T
-    n_points = data.shape[1]
-    data = data[:, ::int(n_points/100)]
+    N = data.shape[1]
+    data = data[:, ::int(N/100)]
     U, R, P, Q, V = data
-    ax.plot(U, np.log(-V), label = "%d"%(i-1))
+    ax.plot(U, np.log(-V), label = "%d"%i)
 
 ax.set_xlabel("$r/a_0$")
 ax.set_ylabel("$\log(V/E_0)$")
 
-ax1.plot(n, energies, "-o", ms=2)
-ax1.set_xlabel("Iteration")
-ax1.set_ylabel("Energy/$E_0$")
-
-ax.legend()
-fig.tight_layout()
+plt.legend()
 plt.savefig("change.pdf")
+#plt.show()
     
 logU = np.log(U)
 logV = np.log(-V)
